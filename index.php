@@ -66,7 +66,10 @@ echo 'a = ' . $a . '<br>';
 echo 'b = ' . $b . '<br>';
 
 echo 'меняем местами:<br>';
-list($b, $a) = [$a, $b];
+//list($b, $a) = [$a, $b];
+$a = $a + $b;
+$b = $a - $b;
+$a = $a - $b;
 
 echo 'a = ' . $a . '<br>';
 echo 'b = ' . $b . '<br>';
