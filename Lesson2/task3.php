@@ -27,4 +27,7 @@ $b = rand(-10, 10);
 echo 'Задание 3.<br>';
 echo 'a = ' . $a . '<br>';
 echo 'b = ' . $b . '<br>';
-echo compare($a, $b) . '<hr>';
+echo 'addition ' . addition($a, $b) . '<br>';
+echo 'subtraction ' . subtraction($a, $b) . '<br>';
+echo 'multiplication ' . multiplication($a, $b) . '<br>';
+echo 'division ' . division($a, $b) . '<hr>';
