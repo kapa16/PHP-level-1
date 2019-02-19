@@ -53,23 +53,35 @@ $menuContent = [
     ],
 ];
 
-function createMenu(array $menuContent)
+function createMenu(array $menuContent, int $level)
 {
-    $html = '<ul>';
+
+    $classes = '';
+    if ($level > 0) {
+        $classes .= 'main-menu__submenu';
+    } else {
+        $classes .= 'main-menu';
+    }
+    if ($level > 1) {
+        $classes .= ' main-menu__submenu-right';
+    }
+
+        $html = '<ul class="' . $classes . '">';
     foreach ($menuContent as $key => $value) {
+
         $subMenu = '';
         if (isset($value['children']) && is_array($value['children'])) {
-            $subMenu = createMenu($value['children']);
+            $subMenu = createMenu($value['children'], $level + 1);
         }
         $title = htmlspecialchars($value['title']);
         $link = htmlspecialchars($value['link']);
-        $html .= '<li><a href="' . $link . '">' . $title . '</a>' . $subMenu . '</li>';
+        $html .= '<li class="main-menu__list"><a href="' . $link . '">' . $title . '</a>' . $subMenu . '</li>';
 
     }
     $html .= '</ul>';
     return $html;
 }
 
-echo createMenu($menuContent);
+echo createMenu($menuContent, 0);
 
 echo '<hr>';
