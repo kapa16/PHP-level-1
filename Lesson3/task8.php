@@ -1,7 +1,15 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: admin
- * Date: 19.02.2019
- * Time: 11:33
- */
+
+//8. *Повторить третье задание, но вывести на экран только города, начинающиеся с буквы «К».
+
+echo 'Задание 8. <br>';
+
+foreach ($regions as $region => $cities) {
+    echo $region . ":<br>";
+    $citiesK = array_filter ($cities, function ($city) {
+        return mb_substr($city, 0, 1) === 'К';
+    });
+    echo implode(', ', $citiesK) . "<br>";
+}
+
+echo '<hr>';
