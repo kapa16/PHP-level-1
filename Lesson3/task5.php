@@ -10,3 +10,5 @@ function changeSpaces($str) {
 }
 
 echo changeSpaces('Написать функцию, которая заменяет в строке пробелы на подчеркивания.') . '<br>';
+
+echo '<hr>';
