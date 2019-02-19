@@ -6,7 +6,9 @@ echo 'Задание 1. <br>';
 $i = 0;
 while ($i <= 100) {
     if ($i % 3 === 0 ) {
-        echo $i . '<br>';
+        echo $i . '&nbsp;&nbsp;';
     }
     $i++;
 };
+
+echo '<hr>';
