@@ -1,0 +1,40 @@
+ul
+  list-style: none
+  padding: 0
+
+.main-menu
+  display: flex
+
+  & a
+    display: block
+    padding: 5px
+    margin-left: -1px
+    margin-top: -1px
+    text-decoration: none
+    border: 1px solid gray
+    background: white
+    color: black
+
+    &:hover
+      background: gray
+      color: white
+
+  &__submenu
+    position: absolute
+    top: 100%
+    left: 0
+    flex-direction: column
+    display: none
+
+    &-right
+      top: 0
+      left: 100%
+
+  &__list
+    position: relative
+    &:hover > .main-menu__submenu
+      display: flex
+
+
+
+
