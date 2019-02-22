@@ -2,7 +2,7 @@
 
 require_once (__DIR__ . '/../config/config.php');
 
-$imagesSrc = getPhotos(WWW_DIR . 'img');
+$imagesSrc = getPhotos(WWW_DIR . 'img/gallery/');
 $galleryHtml = '';
 foreach ($imagesSrc as $imgSrc) {
     $imageData = [
