@@ -33,6 +33,7 @@ function getPhotos($dirName) {
     }
 
     $files = scandir($dirName);
+    $filesImage = [];
 
     foreach ($files as $fileName) {
         $fullPath = $dirName . '/' . $fileName;
@@ -42,6 +43,9 @@ function getPhotos($dirName) {
         if (!exif_imagetype($fullPath)) {
             continue;
         }
-        var_dump($fullPath);
+
+        $filesImage[] = str_replace(WWW_DIR, '', $fullPath);
     }
+
+    return $filesImage;
 }
