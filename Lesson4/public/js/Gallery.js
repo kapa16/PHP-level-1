@@ -12,7 +12,8 @@ class Gallery {
     };
     this.images = [];
     this.galleryContainerEl = galleryContainerEl;
-    this.galleryWrapperEl = document.createElement('div');
+    this.galleryWrapperEl = document.querySelector(`.${this.settings.galleryWrapperClass}`);
+    this._addEventOpenFullImage();
   }
 
   /**
@@ -21,44 +22,6 @@ class Gallery {
    */
   init(settings) {
     Object.assign(this.settings, settings);
-  }
-
-  render() {
-    this.galleryWrapperEl.classList.add(this.settings.galleryWrapperClass);
-    this.images.forEach(elem => this._createElement(elem));
-    this.galleryContainerEl.appendChild(this.galleryWrapperEl);
-  }
-
-  _createElement(elem) {
-    const imageWrapEl = document.createElement('div');
-    imageWrapEl.appendChild(this._createImageElement(elem));
-    this.galleryWrapperEl.appendChild(imageWrapEl);
-  }
-
-  _createImageElement(elem) {
-    const imageEl = new Image();
-    imageEl.src = elem.src;
-    imageEl.alt = elem.alt;
-    imageEl.dataset.srcMax = elem.srcMax;
-    imageEl.classList.add(this.settings.galleryImageClass);
-    return imageEl;
-  }
-
-  setImages(images) {
-    if (!Array.isArray(images)) {
-      return;
-    }
-    this.images = images.slice();
-  }
-
-  createGallery(fileName) {
-    fetch(fileName)
-      .then(response => response.json())
-      .then(imagesJson => {
-        this.setImages(imagesJson);
-        this.render(this.galleryContainerEl);
-        this._addEventOpenFullImage(this.galleryContainerEl);
-      });
   }
 
   _addEventOpenFullImage() {
