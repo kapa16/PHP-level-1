@@ -7,7 +7,7 @@ class Gallery {
       fullSizeImageScreenClass: 'gallery__modal-screen',
       fullSizeImageClass: 'gallery__full-image',
       fullSizeImageCloseButtonClass: 'gallery__close-button',
-      fullSizeImageCloseButtonSrc: 'img/gallery/close.png',
+      fullSizeImageCloseButtonSrc: 'img/close.png',
 
     };
     this.images = [];
@@ -77,8 +77,8 @@ class Gallery {
   _createFullSizeImage(elem) {
     const fullSizeImageEl = new Image();
     fullSizeImageEl.classList.add(this.settings.fullSizeImageClass);
-    fullSizeImageEl.src = elem.dataset.srcMax;
-    fullSizeImageEl.alt = elem.dataset.alt;
+    fullSizeImageEl.src = elem.src;
+    fullSizeImageEl.alt = elem.alt;
     return fullSizeImageEl;
   }
 }
