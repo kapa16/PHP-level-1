@@ -1,5 +1,5 @@
 <div class="gallery__image-wrap">
-    <a href="image_view.php?photo-id={{IMAGEID}}">
+    <a href="image_view.php?photo-id={{IMAGEID}}&views={{IMAGEVIEWS}}">
         <img
                 src="{{IMAGESOURCE}}"
                 alt="{{IMAGEALT}}"
