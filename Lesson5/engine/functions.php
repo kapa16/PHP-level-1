@@ -27,25 +27,42 @@ function render($file, $variables = []) {
     return $template;
 }
 
-function getPhotos($dirName) {
-    if (!is_dir($dirName)) {
-        return 'Directory ' . $dirName . ' not found';
+function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS) {
+
+    $condition = "";
+    if ($photoId) {
+        $condition = " WHERE `id` = " . $photoId;
     }
 
-    $files = scandir($dirName);
+    $files = getAssocData("SELECT * FROM `images`" . $condition ." ORDER BY ". $sort .";");
     $filesImage = [];
 
-    foreach ($files as $fileName) {
-        $fullPath = $dirName . '/' . $fileName;
+    foreach ($files as $fileData) {
+        $fullPath = $fileData['url'];
+
         if (!is_file($fullPath)) {
             continue;
         }
+
         if (!exif_imagetype($fullPath)) {
             continue;
         }
 
-        $filesImage[] = str_replace(WWW_DIR, '', $fullPath);
+        $filesImage[] = $fileData;
     }
 
     return $filesImage;
+}
+
+function getHtmlGallery($images, $templateName) {
+    $galleryHtml = '';
+    foreach ($images as $image) {
+        $imageData = [
+            'imageSource' => $image['url'],
+            'imageAlt' => $image['title'],
+            'imageId' => $image['id']
+        ];
+        $galleryHtml .= render(TEMPLATE_DIR . $templateName, $imageData);
+    }
+    return render(TEMPLATE_DIR . 'gallery.tpl', ['contentGallery' => $galleryHtml]);
 }
