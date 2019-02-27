@@ -11,15 +11,11 @@ function render($file, $variables = []) {
     
     $template = file_get_contents($file);
 
-
     if (empty($variables)) {
         return $template;
     }
 
     foreach ($variables as $key => $value) {
-        if (empty($value)) {
-            continue;
-        }
         $searchKey = '{{' . strtoupper($key) . '}}';
         $template = str_replace($searchKey, $value, $template);
     }
@@ -34,7 +30,8 @@ function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS) {
         $condition = " WHERE `id` = " . $photoId;
     }
 
-    $files = getAssocData("SELECT * FROM `images`" . $condition ." ORDER BY ". $sort .";");
+    $query = "SELECT * FROM `images`" . $condition ." ORDER BY `". $sort ."` DESC;";
+    $files = getAssocData($query);
     $filesImage = [];
 
     foreach ($files as $fileData) {
@@ -60,9 +57,15 @@ function getHtmlGallery($images, $templateName) {
         $imageData = [
             'imageSource' => $image['url'],
             'imageAlt' => $image['title'],
-            'imageId' => $image['id']
+            'imageId' => $image['id'],
+            'imageViews' => $image['views']
         ];
         $galleryHtml .= render(TEMPLATE_DIR . $templateName, $imageData);
     }
     return render(TEMPLATE_DIR . 'gallery.tpl', ['contentGallery' => $galleryHtml]);
+}
+
+function setPhotoViews($photoId, $views) {
+    $query = "UPDATE `images` SET `views` = " . $views ." WHERE `id` = ". $photoId .";";
+    executeQuery($query);
 }
