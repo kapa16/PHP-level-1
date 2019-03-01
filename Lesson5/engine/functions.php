@@ -1,6 +1,7 @@
 <?php
 
-function render($file, $variables = []) {
+function render($file, $variables = [])
+{
     if (!is_file($file)) {
         return 'File ' . $file . ' not found';
     }
@@ -8,7 +9,7 @@ function render($file, $variables = []) {
     if (filesize($file) === 0) {
         return 'File ' . $file . ' is empty';
     }
-    
+
     $template = file_get_contents($file);
 
     if (empty($variables)) {
@@ -23,14 +24,15 @@ function render($file, $variables = []) {
     return $template;
 }
 
-function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS) {
+function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS)
+{
 
     $condition = "";
     if ($photoId) {
         $condition = " WHERE `id` = " . $photoId;
     }
 
-    $query = "SELECT * FROM `images`" . $condition ." ORDER BY `". $sort ."` DESC;";
+    $query = "SELECT * FROM `images`" . $condition . " ORDER BY `" . $sort . "` DESC;";
     $files = getAssocData($query);
     $filesImage = [];
 
@@ -51,21 +53,23 @@ function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS) {
     return $filesImage;
 }
 
-function getHtmlGallery($images, $templateName) {
+function getHtmlGallery($images, $templateName)
+{
     $galleryHtml = '';
     foreach ($images as $image) {
         $imageData = [
             'imageSource' => $image['url'],
-            'imageAlt' => $image['title'],
-            'imageId' => $image['id'],
-            'imageViews' => $image['views']
+            'imageAlt'    => $image['title'],
+            'imageId'     => $image['id'],
+            'imageViews'  => $image['views'],
         ];
         $galleryHtml .= render(TEMPLATE_DIR . $templateName, $imageData);
     }
     return render(TEMPLATE_DIR . 'gallery.tpl', ['contentGallery' => $galleryHtml]);
 }
 
-function setPhotoViews($photoId, $views) {
-    $query = "UPDATE `images` SET `views` = " . $views ." WHERE `id` = ". $photoId .";";
+function setPhotoViews($photoId, $views)
+{
+    $query = "UPDATE `images` SET `views` = " . $views . " WHERE `id` = " . $photoId . ";";
     executeQuery($query);
 }
