@@ -16,18 +16,6 @@ if (!empty($_POST)){
     }
 }
 
-switch ($sign){
-    case 'addition':
-        $result = $x + $y;
-        break;
-    case 'subtraction':
-        $result =  $x - $y;
-        break;
-    case 'multiplication':
-        $result =  $x * $y;
-        break;
-    case 'division':
-        $result =  $x / $y;
-        break;
-}
+$result = mathOperation($x, $y, $sign);
+
 

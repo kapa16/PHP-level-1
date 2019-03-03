@@ -1,5 +1,6 @@
 <?php
-require_once __DIR__ . '/../engine/calc.php'
+require_once __DIR__ . '/../engine/functions.php';
+require_once __DIR__ . '/../engine/calc.php';
 ?>
 
 <!doctype html>
@@ -24,6 +25,17 @@ require_once __DIR__ . '/../engine/calc.php'
     <label>Y: <input type="number" step="0.0001" name="y" value="<?= $y ?>"></label>
     <button type="submit">=</button>
     <span><?=$result?></span>
+</form>
+
+<h2>Задание №2.</h2>
+<form action="/" method="post" name="calc">
+    <label>X: <input type="number" step="any" name="x" value="<?= $x ?>"></label>
+    <input type="submit" name="sign" value="+">
+    <input type="submit" name="sign" value="-">
+    <input type="submit" name="sign" value="*">
+    <input type="submit" name="sign" value="/">
+    <label>Y: <input type="number" step="any" name="y" value="<?= $y ?>"></label>
+    <span> = <?=$result?></span>
 </form>
 </body>
 </html>
