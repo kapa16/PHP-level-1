@@ -24,20 +24,20 @@ function render($file, $variables = [])
     return $template;
 }
 
-function readRecords($tableName, $sort = SORT_BY_ID)
+function readRecords($tableName, $sort = SORT_BY_ID, $directionSort = 'DESC')
 {
-    $query = "SELECT * FROM `" . $tableName . "` ORDER BY `" . $sort . "` DESC;";
+    $query = 'SELECT * FROM `' . $tableName . '` ORDER BY `' . $sort . '` ' . $directionSort . ';';
     return getAssocData($query);
 }
 
 function readRecord($tableName, $recordId)
 {
-    $query = "SELECT * FROM `" . $tableName . "` WHERE `id`=" . $recordId . ";";
+    $query = 'SELECT * FROM `' . $tableName . '` WHERE `id`=' . $recordId . ';';
     return getAssocData($query);
 }
 
 function updateRecord($tableName = '', $fieldName = '', $setData = '', $dataId = 0)
 {
-    $query = "UPDATE `" . $tableName . "` SET `" . $fieldName . "` = " . $setData . " WHERE `id` = " . $dataId . ";";
+    $query = 'UPDATE `' . $tableName . '` SET `' . $fieldName . '` = ' . $setData . ' WHERE `id` = ' . $dataId . ';';
     executeQuery($query);
 }
