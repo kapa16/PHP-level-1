@@ -2,8 +2,8 @@
 
 require_once(__DIR__ . '/../config/config.php');
 
-$images = getPhotos();
-$galleryHtml = getHtmlGallery($images, 'image_card.tpl');
+$images = getImages();
+$galleryHtml = getHtmlGallery($images);
 
 
 $templateData = [

@@ -5,7 +5,7 @@ require_once(__DIR__ . '/../config/config.php');
 $photoId = +$_GET['photo-id'];
 $views = +$_GET['views'] + 1;
 
-$image = getPhotos($photoId);
+$image = getImage($imageId);
 
 $galleryHtml = getHtmlGallery($image, 'image_view.tpl');
 

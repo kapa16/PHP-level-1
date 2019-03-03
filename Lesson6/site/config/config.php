@@ -12,9 +12,12 @@ define('DB_USER', 'geek_brains');
 define('DB_PASS', '123123');
 define('DB_NAME', 'geek_brains_shop');
 
+define('SORT_BY_ID', 'id');
 define('SORT_IMAGE_BY_VIEWS', 'views');
 define('SORT_IMAGE_BY_NAME', 'title');
-define('SORT_IMAGE_BY_ID', 'id');
+
+define('IMAGE_CARD_TEMPLATE', TEMPLATE_DIR . 'image_card.tpl');
+define('IMAGE_GALLERY_TEMPLATE', TEMPLATE_DIR . 'gallery.tpl');
 
 require_once(ENGINE_DIR . 'db.php');
 require_once(ENGINE_DIR . 'functions.php');

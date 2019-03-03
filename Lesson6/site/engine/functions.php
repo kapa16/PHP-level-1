@@ -24,31 +24,20 @@ function render($file, $variables = [])
     return $template;
 }
 
-function getPhotos($photoId = null, $sort = SORT_IMAGE_BY_VIEWS)
+function readRecords($tableName, $sort = SORT_BY_ID)
 {
+    $query = "SELECT * FROM `" . $tableName . "` ORDER BY `" . $sort . "` DESC;";
+    return getAssocData($query);
+}
 
-    $condition = "";
-    if ($photoId) {
-        $condition = " WHERE `id` = " . $photoId;
-    }
+function readRecord($tableName, $recordId)
+{
+    $query = "SELECT * FROM `" . $tableName . "` WHERE `id`=" . $recordId . ";";
+    return getAssocData($query);
+}
 
-    $query = "SELECT * FROM `images`" . $condition . " ORDER BY `" . $sort . "` DESC;";
-    $files = getAssocData($query);
-    $filesImage = [];
-
-    foreach ($files as $fileData) {
-        $fullPath = $fileData['url'];
-
-        if (!is_file($fullPath)) {
-            continue;
-        }
-
-        if (!exif_imagetype($fullPath)) {
-            continue;
-        }
-
-        $filesImage[] = $fileData;
-    }
-
-    return $filesImage;
+function updateRecord($tableName = '', $fieldName = '', $setData = '', $dataId = 0)
+{
+    $query = "UPDATE `" . $tableName . "` SET `" . $fieldName . "` = " . $setData . " WHERE `id` = " . $dataId . ";";
+    executeQuery($query);
 }
