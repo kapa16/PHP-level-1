@@ -3,13 +3,13 @@ $x = 0;
 $y = 0;
 $sign = '';
 $result = '';
-
+var_dump($_POST);
 if (!empty($_POST)){
-    if (filter_var($_POST['x'], FILTER_VALIDATE_FLOAT)) {
-        $x = +$_POST['x'];
+    if (!empty($_POST['x'])) {
+        $x = (float)$_POST['x'];
     }
-    if (filter_var($_POST['y'], FILTER_VALIDATE_FLOAT)) {
-        $y = +$_POST['y'];
+    if (!empty($_POST['y'])) {
+        $y = (float)$_POST['y'];
     }
     if (!empty($_POST['sign'])) {
         $sign = $_POST['sign'];
@@ -17,17 +17,21 @@ if (!empty($_POST)){
 }
 
 switch ($sign){
-    case 'addition':
+    case '+':
         $result = $x + $y;
         break;
-    case 'subtraction':
+    case '-':
         $result =  $x - $y;
         break;
-    case 'multiplication':
+    case '*':
         $result =  $x * $y;
         break;
-    case 'division':
-        $result =  $x / $y;
+    case '/':
+        if ($y !== 0) {
+            $result = $x / $y;
+        } else {
+            $result = 0;
+        }
         break;
 }
 

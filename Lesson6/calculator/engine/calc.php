@@ -5,11 +5,11 @@ $sign = '';
 $result = '';
 
 if (!empty($_POST)){
-    if (filter_var($_POST['x'], FILTER_VALIDATE_FLOAT)) {
-        $x = +$_POST['x'];
+    if (!empty($_POST['x'])) {
+        $x = (float)$_POST['x'];
     }
-    if (filter_var($_POST['y'], FILTER_VALIDATE_FLOAT)) {
-        $y = +$_POST['y'];
+    if (!empty($_POST['y'])) {
+        $y = (float)$_POST['y'];
     }
     if (!empty($_POST['sign'])) {
         $sign = $_POST['sign'];

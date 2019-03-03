@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/calc/index.php'
+require_once __DIR__ . '/../engine/calc.php'
 ?>
 
 <!doctype html>
@@ -12,19 +12,18 @@ require_once __DIR__ . '/calc/index.php'
     <title>Document</title>
 </head>
 <body>
-
+<h2>Задание №1.</h2>
 <form action="/" method="post" name="calc">
-    <input type="number" name="x1">
+    <label>X: <input type="number" step="0.0001" name="x" value="<?= $x ?>"></label>
     <select name="sign">
-        <option value="addition">+</option>
-        <option value="subtraction">-</option>
-        <option value="multiplication">*</option>
-        <option value="plus">/</option>
+        <option value="addition" <?php if ($sign === 'addition') {echo 'selected';}?>>+</option>
+        <option value="subtraction" <?php if ($sign === 'subtraction') {echo 'selected';}?>>-</option>
+        <option value="multiplication" <?php if ($sign === 'multiplication') {echo 'selected';}?>>*</option>
+        <option value="division" <?php if ($sign === 'division') {echo 'selected';}?>>/</option>
     </select>
-    <input type="number" name="y1">
-    <button type="submit">Расчет</button>
+    <label>Y: <input type="number" step="0.0001" name="y" value="<?= $y ?>"></label>
+    <button type="submit">=</button>
+    <span><?=$result?></span>
 </form>
-
-
 </body>
 </html>
