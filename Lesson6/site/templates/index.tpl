@@ -17,6 +17,11 @@
     {{CONTENT}}
 </main>
 
+<section class="container">
+    <h2>Комментарии:</h2>
+    {{REVIEWS}}
+</section>
+
 <footer class="container">
     <p>Copyright &copy;{{CURRENTYEAR}}</p>
 </footer>
