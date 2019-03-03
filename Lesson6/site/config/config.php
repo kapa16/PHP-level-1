@@ -18,3 +18,4 @@ define('SORT_IMAGE_BY_ID', 'id');
 
 require_once(ENGINE_DIR . 'db.php');
 require_once(ENGINE_DIR . 'functions.php');
+require_once(ENGINE_DIR . 'gallery.php');
