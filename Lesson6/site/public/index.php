@@ -3,7 +3,8 @@
 require_once(__DIR__ . '/../config/config.php');
 
 $images = getImages();
-$galleryHtml = getHtmlGallery($images);
+$imagesHtml = getHtmlImages($images);
+$galleryHtml = getHtmlGallery($imagesHtml);
 
 
 $templateData = [

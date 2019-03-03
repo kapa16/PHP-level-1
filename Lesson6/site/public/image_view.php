@@ -2,12 +2,22 @@
 
 require_once(__DIR__ . '/../config/config.php');
 
-$photoId = +$_GET['photo-id'];
-$views = +$_GET['views'] + 1;
+if (empty($_GET['photo-id'])) {
+    header('Location: /');
+    die;
+}
+
+$imageId = +$_GET['photo-id'];
 
 $image = getImage($imageId);
+if (!$image) {
+    header('Location: /');
+    die;
+}
 
-$galleryHtml = getHtmlGallery($image, 'image_view.tpl');
+$views = +$image['views'] + 1;
+$imagesHtml = getHtmlImage($image, IMAGE_VIEW_TEMPLATE);
+$galleryHtml = getHtmlGallery($imagesHtml);
 
 $templateData = [
     'title'       => 'Gallery',
@@ -16,6 +26,6 @@ $templateData = [
     'content'     => $galleryHtml,
 ];
 
-echo render(TEMPLATE_DIR . 'index.tpl', $templateData);
+echo render(INDEX_TEMPLATE, $templateData);
 
-setPhotoViews($photoId, $views);
+setPhotoViews($imageId, $views);

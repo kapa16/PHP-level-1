@@ -1,6 +1,6 @@
 <?php
 
-function getHtmlImage($image)
+function getHtmlImage($image, $templateName)
 {
     $imageData = [
         'imageSource' => $image['url'],
@@ -8,32 +8,26 @@ function getHtmlImage($image)
         'imageId'     => $image['id'],
         'imageViews'  => $image['views'],
     ];
-    return render(IMAGE_CARD_TEMPLATE, $imageData);
+    return render($templateName, $imageData);
 }
 
 function getHtmlImages($images)
 {
     $galleryHtml = '';
     foreach ($images as $image) {
-        $galleryHtml .= getHtmlImage($image);
+        $galleryHtml .= getHtmlImage($image, IMAGE_CARD_TEMPLATE);
     }
     return $galleryHtml;
 }
 
-function getHtmlGallery($images)
+function getHtmlGallery($galleryHtml)
 {
-    $galleryHtml = getHtmlImages($images);
     return render(IMAGE_GALLERY_TEMPLATE, ['contentGallery' => $galleryHtml]);
-}
-
-function setPhotoViews($imageId, $views)
-{
-    updateRecord('images', 'views', $views, $imageId);
 }
 
 function getImages()
 {
-    $records = readRecords('images', SORT_IMAGE_BY_VIEWS);
+    $records = readRecords('images', SORT_BY_VIEWS);
     $data = [];
 
     foreach ($records as $record) {
@@ -51,8 +45,7 @@ function getImages()
 
 function getImage($imageId)
 {
-    $record = readRecord('images', $imageId);
-var_dump($record);
+    $record = readRecord('images', $imageId)[0];
 
     $fullPath = $record['url'];
 
@@ -62,4 +55,9 @@ var_dump($record);
 
     return $record;
 
+}
+
+function setPhotoViews($imageId, $views)
+{
+    updateRecord('images', 'views', $views, $imageId);
 }
