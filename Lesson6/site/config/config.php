@@ -30,9 +30,9 @@ define('PRODUCTS_CATALOG_TEMPLATE', TEMPLATE_DIR . 'product_catalog.tpl');
 define('PRODUCT_CARD_TEMPLATE', TEMPLATE_DIR . 'product_card.tpl');
 define('PRODUCT_VIEW_TEMPLATE', TEMPLATE_DIR . 'product_view.tpl');
 
-require_once(ENGINE_DIR . 'db.php');
-require_once(ENGINE_DIR . 'functions.php');
-require_once(ENGINE_DIR . 'gallery.php');
-require_once(ENGINE_DIR . 'reviews.php');
-require_once(ENGINE_DIR . 'products.php');
-require_once(ENGINE_DIR . 'products_crud.php');
+require_once ENGINE_DIR . 'db.php';
+require_once ENGINE_DIR . 'functions.php';
+require_once ENGINE_DIR . 'gallery.php';
+require_once ENGINE_DIR . 'reviews.php';
+require_once ENGINE_DIR . 'products.php';
+require_once ENGINE_DIR . 'products_crud.php';
