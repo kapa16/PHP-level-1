@@ -10,11 +10,12 @@ $reviews = getReviews();
 $reviewsHtml = getHtmlReviews($reviews);
 
 $templateData = [
-    'title'       => 'Gallery',
-    'header'      => 'Галерея',
-    'currentYear' => date('Y'),
-    'content'     => $galleryHtml,
-    'reviews'     => $reviewsHtml,
+    'title'         => 'Gallery',
+    'header'        => 'Галерея',
+    'currentYear'   => date('Y'),
+    'content'       => $galleryHtml,
+    'reviewsHeader' => 'Комментарии:',
+    'reviews'       => $reviewsHtml,
 ];
 
 echo render(TEMPLATE_DIR . 'index.tpl', $templateData);

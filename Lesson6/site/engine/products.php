@@ -3,7 +3,7 @@
 function getHtmlProduct($product, $templateName)
 {
     $productData = [
-        'productId'        => $product['id'],
+        'productId'          => $product['id'],
         'productName'        => $product['name'],
         'productDescription' => $product['description'],
         'productPrice'       => $product['price'],

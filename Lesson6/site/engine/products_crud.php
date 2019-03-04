@@ -10,17 +10,20 @@ function createProduct($product)
     executeQuery($sql);
 }
 
-function readProduct($productId) {
+function readProduct($productId)
+{
     $sql = 'SELECT * FROM `geek_brains_shop`.`products` WHERE `id`=' . $productId;
     executeQuery($sql);
 }
 
-function updateProduct($productId, $fieldName, $newValue) {
+function updateProduct($productId, $fieldName, $newValue)
+{
     $sql = 'UPDATE `geek_brains_shop`.`products` SET `' . $fieldName . '` = ' . $newValue . ' WHERE `id`=' . $productId;
     executeQuery($sql);
 }
 
-function deleteProduct($productId) {
+function deleteProduct($productId)
+{
     $sql = 'DELETE FROM `geek_brains_shop`.`products` WHERE `id`=' . $productId;
     executeQuery($sql);
 }

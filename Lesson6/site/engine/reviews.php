@@ -4,9 +4,9 @@ function getHtmlReview($review, $templateName)
 {
     $reviewData = [
         'commentAuthor' => $review['author'],
-        'comment'    => $review['comment'],
+        'comment'       => $review['comment'],
         'commentId'     => $review['id'],
-        'commentDate'  => $review['date'],
+        'commentDate'   => $review['date'],
     ];
     return render($templateName, $reviewData);
 }

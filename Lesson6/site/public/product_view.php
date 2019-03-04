@@ -20,12 +20,12 @@ $productHtml = getHtmlProduct($product, PRODUCT_VIEW_TEMPLATE);
 $viewHtml = getHtmlCatalog($productHtml);
 
 $templateData = [
-    'title'       => 'Product',
-    'header'      => 'Информация о товаре',
-    'currentYear' => date('Y'),
-    'content'     => $viewHtml,
-    'reviewsHeader'     => '',
-    'reviews'     => '',
+    'title'         => 'Product',
+    'header'        => 'Информация о товаре',
+    'currentYear'   => date('Y'),
+    'content'       => $viewHtml,
+    'reviewsHeader' => '',
+    'reviews'       => '',
 ];
 
 echo render(INDEX_TEMPLATE, $templateData);

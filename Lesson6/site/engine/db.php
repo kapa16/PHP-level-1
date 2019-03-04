@@ -1,6 +1,7 @@
 <?php
 
-function createConnection() {
+function createConnection()
+{
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
     if (!$link) {
         echo "Ошибка, невозможно установить соединение <br>";
@@ -10,7 +11,8 @@ function createConnection() {
     return $link;
 }
 
-function executeQuery($query) {
+function executeQuery($query)
+{
 
     $link = createConnection();
     if (!$link) {
@@ -23,7 +25,8 @@ function executeQuery($query) {
     return $result;
 }
 
-function getAssocData($query) {
+function getAssocData($query)
+{
 
     $result = executeQuery($query);
 

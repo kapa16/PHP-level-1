@@ -16,11 +16,12 @@ $reviews = getReviews();
 $reviewsHtml = getHtmlReviews($reviews);
 
 $templateData = [
-    'title'       => 'Shop',
-    'header'      => 'Каталог магазина',
-    'currentYear' => date('Y'),
-    'content'     => $catalogHtml,
-    'reviews'     => $reviewsHtml,
+    'title'         => 'Shop',
+    'header'        => 'Каталог магазина',
+    'currentYear'   => date('Y'),
+    'content'       => $catalogHtml,
+    'reviewsHeader' => 'Комментарии:',
+    'reviews'       => $reviewsHtml,
 ];
 
 echo render(INDEX_TEMPLATE, $templateData);
