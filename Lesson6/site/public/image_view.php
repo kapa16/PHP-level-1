@@ -24,6 +24,8 @@ $templateData = [
     'header'      => 'Просмотр полноразмерного изображения',
     'currentYear' => date('Y'),
     'content'     => $galleryHtml,
+    'reviewsHeader'     => '',
+    'reviews'     => '',
 ];
 
 echo render(INDEX_TEMPLATE, $templateData);

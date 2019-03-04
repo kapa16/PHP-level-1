@@ -41,4 +41,10 @@
   cursor: pointer;
 }
 
+.products__catalog {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 /*# sourceMappingURL=style.css.map */

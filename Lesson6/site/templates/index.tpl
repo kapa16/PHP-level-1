@@ -9,6 +9,13 @@
     <title>{{TITLE}}</title>
 </head>
 <body>
+<nav>
+    <ul>
+        <li><a href="/">Главная</a></li>
+        <li><a href="/products.php">Каталог товаров</a></li>
+    </ul>
+</nav>
+
 <header class="container">
     <h1>{{HEADER}}</h1>
 </header>
@@ -18,7 +25,7 @@
 </main>
 
 <section class="container">
-    <h2>Комментарии:</h2>
+    <h2>{{REVIEWSHEADER}}</h2>
     {{REVIEWS}}
 </section>
 

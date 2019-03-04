@@ -7,13 +7,13 @@
 -- Версия сервера: 5.7.25-0ubuntu0.18.04.2
 -- Версия PHP: 7.1.24-1+ubuntu16.04.1+deb.sury.org+1
 
-CREATE USER 'geek_brains'@'localhost' IDENTIFIED WITH mysql_native_password BY '123123';
+CREATE USER IF NOT EXISTS 'geek_brains'@'localhost' IDENTIFIED WITH mysql_native_password BY '123123';
 GRANT USAGE ON *.* TO 'geek_brains'@'localhost';
 ALTER USER 'geek_brains'@'localhost' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;
 
 GRANT ALL PRIVILEGES ON `geek_brains_shop`.* TO 'geek_brains'@'localhost';
 
-CREATE DATABASE `geek_brains_shop`;
+CREATE DATABASE IF NOT EXISTS `geek_brains_shop`;
 USE `geek_brains_shop`;
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
