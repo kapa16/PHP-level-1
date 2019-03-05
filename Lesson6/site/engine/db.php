@@ -17,7 +17,6 @@ function executeQuery($query)
     $link = createConnection();
 
     $result = mysqli_query($link, $query);
-    var_dump($query);
     mysqli_close($link);
     return $result;
 }
