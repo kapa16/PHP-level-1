@@ -9,10 +9,11 @@
     <title>{{TITLE}}</title>
 </head>
 <body>
-<nav class="container main_menu">
-    <ul>
-        <li><a href="/">Главная</a></li>
-        <li><a href="/products.php">Каталог товаров</a></li>
+<nav class="container">
+    <ul class="main_menu">
+        <li class="main_menu__list"><a  class="main_menu__link" href="/">Главная</a></li>
+        <li class="main_menu__list"><a  class="main_menu__link" href="/products.php">Каталог товаров</a></li>
+        <li class="main_menu__list"><a  class="main_menu__link" href="/login.php">Вход</a></li>
     </ul>
 </nav>
 
