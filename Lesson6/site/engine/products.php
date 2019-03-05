@@ -41,14 +41,14 @@ function fillTestProduct()
 {
     $product = [];
     for ($i = 1; $i <= 20; $i++) {
-        $product['name'] = 'Товар ' . $i;
-        $product['description'] = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos distinctio dolorum facilis fugiat molestiae nihil quos reiciendis rem vel? Iusto.';
-        $product['price'] = 100 * $i;
+        $name = 'Товар ' . $i;
+        $description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos distinctio dolorum facilis fugiat molestiae nihil quos reiciendis rem vel? Iusto.';
+        $price = 100 * $i;
         $imsSrc = 'img/products/man/product' . $i . '.jpg';
         if (!is_file($imsSrc)) {
             $imsSrc = 'img/products/woman/product' . $i . '.jpg';
         }
-        $product['image'] = $imsSrc;
-        createProduct($product);
+        $image = $imsSrc;
+        createProduct($name, $description, $price, $image);
     }
 }

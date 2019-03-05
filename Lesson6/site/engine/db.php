@@ -15,12 +15,9 @@ function executeQuery($query)
 {
 
     $link = createConnection();
-    if (!$link) {
-        echo "Ошибка, невозможно установить соединение <br>";
-        exit;
-    }
 
     $result = mysqli_query($link, $query);
+    var_dump($query);
     mysqli_close($link);
     return $result;
 }
