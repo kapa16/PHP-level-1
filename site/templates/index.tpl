@@ -9,7 +9,7 @@
     <title>{{TITLE}}</title>
 </head>
 <body>
-<nav>
+<nav class="container main_menu">
     <ul>
         <li><a href="/">Главная</a></li>
         <li><a href="/products.php">Каталог товаров</a></li>
