@@ -222,6 +222,35 @@ COMMIT;
 ALTER TABLE `users`
   ADD UNIQUE INDEX `login` (`login`);
 
+CREATE TABLE `cart`
+(
+  `id`    int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `user_id`   int(11) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+ALTER TABLE `cart`
+  ADD CONSTRAINT `cart_user_id` FOREIGN KEY (`user_id`)
+    REFERENCES `users` (`id`)
+    ON UPDATE CASCADE
+    ON DELETE RESTRICT;
+
+CREATE TABLE `cart_product`
+(
+  `id`    int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `cart_id`   int(11) NOT NULL,
+  `product_id`   int(11) NOT NULL,
+  `quantity`   int(11) NOT NULL
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+ALTER TABLE `cart_product`
+  ADD CONSTRAINT `cart_product_id` FOREIGN KEY (`cart_id`)
+  REFERENCES `cart` (`id`)
+  ON UPDATE CASCADE
+  ON DELETE RESTRICT;
+
+
 /*!40101 SET CHARACTER_SET_CLIENT = @OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS = @OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION = @OLD_COLLATION_CONNECTION */;
