@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../config/config.php');
+require_once __DIR__ . '/../config/config.php';
 
 $images = getImages();
 $imagesHtml = getHtmlImages($images);
@@ -8,14 +8,15 @@ $galleryHtml = getHtmlGallery($imagesHtml);
 
 $reviews = getReviews();
 $reviewsHtml = getHtmlReviews($reviews);
-
-$templateData = [
-    'title'         => 'Gallery',
-    'header'        => 'Галерея',
-    'currentYear'   => date('Y'),
-    'content'       => $galleryHtml,
+$reviewsContainerData = [
     'reviewsHeader' => 'Комментарии:',
     'reviews'       => $reviewsHtml,
 ];
+$reviewsContainerHtml = render(REVIEW_CONTAINER_TEMPLATE, $reviewsContainerData);
+
+$templateData['title'] = 'Gallery';
+$templateData['header'] = 'Галерея';
+$templateData['content'] = $galleryHtml;
+$templateData['reviewsContainer'] = $reviewsContainerHtml;
 
 echo render(TEMPLATE_DIR . 'index.tpl', $templateData);

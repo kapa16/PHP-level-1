@@ -15,14 +15,9 @@ $catalogHtml = getHtmlCatalog($productsHtml);
 $reviews = getReviews();
 $reviewsHtml = getHtmlReviews($reviews);
 
-$templateData = [
-    'title'         => 'Shop',
-    'header'        => 'Каталог магазина',
-    'currentYear'   => date('Y'),
-    'content'       => $catalogHtml,
-    'reviewsHeader' => 'Комментарии:',
-    'reviews'       => $reviewsHtml,
-];
+$templateData['title'] = 'Shop';
+$templateData['header'] = 'Каталог магазина';
+$templateData['content'] = $catalogHtml;
 
 echo render(INDEX_TEMPLATE, $templateData);
 

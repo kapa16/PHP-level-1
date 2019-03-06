@@ -19,14 +19,9 @@ if (!$product) {
 $productHtml = getHtmlProduct($product, PRODUCT_VIEW_TEMPLATE);
 $viewHtml = getHtmlCatalog($productHtml);
 
-$templateData = [
-    'title'         => 'Product',
-    'header'        => 'Информация о товаре',
-    'currentYear'   => date('Y'),
-    'content'       => $viewHtml,
-    'reviewsHeader' => '',
-    'reviews'       => '',
-];
+$templateData['title'] = 'Product';
+$templateData['header'] = 'Информация о товаре';
+$templateData['content'] = $viewHtml;
 
 echo render(INDEX_TEMPLATE, $templateData);
 
