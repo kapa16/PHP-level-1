@@ -17,13 +17,17 @@ if (empty($_SESSION['login'])) {
         'link'  => '/login.php',
     ];
     $menuContent[] = [
-        'title' => 'Вход',
-        'link'  => '/login.php',
+        'title' => 'Регистрация',
+        'link'  => '/registration.php',
     ];
 } else {
     $menuContent[] = [
         'title' => 'Привет, ' . $_SESSION['name'],
         'link'  => '/personalArea.php',
+    ];
+    $menuContent[] = [
+        'title' => 'Выход',
+        'link'  => '/logout.php',
     ];
 }
 
