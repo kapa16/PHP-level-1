@@ -12,7 +12,7 @@ window.onload = () => {
     }
   })
 
-  const cart = new Cart('/api/cart/php');
+  const cart = new Cart('/api/cart.php');
 
   $('.products__catalog').on('click', (evt) => {
     if (!evt.target.classList.contains('btn-buy')) {
