@@ -26,6 +26,7 @@ define('SORT_BY_VIEWS', 'views');
 define('INDEX_TEMPLATE', TEMPLATE_DIR . 'index.tpl');
 define('LOGIN_TEMPLATE', TEMPLATE_DIR . 'login.tpl');
 define('REGISTRATION_TEMPLATE', TEMPLATE_DIR . 'registration.tpl');
+define('PERSONAL_AREA_TEMPLATE', TEMPLATE_DIR . 'personal_area.tpl');
 
 define('IMAGE_GALLERY_TEMPLATE', TEMPLATE_DIR . 'gallery.tpl');
 define('IMAGE_CARD_TEMPLATE', TEMPLATE_DIR . 'image_card.tpl');
