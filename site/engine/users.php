@@ -26,8 +26,9 @@ function registrationUser($postParams)
 
     $sql = 'INSERT INTO `geek_brains_shop`.`users` (`login`, `email`, `name`, `lastname`, `password`) VALUES (?, ?, ?, ?, ?)';
     $resultSql = executePrepareQuery($sql, array_merge(['sssss'], $userData), true);
-    if ($resultSql === 1) {
+    if ($resultSql) {
         unset($userData['password']);
+        $userData['id'] = $resultSql;
         $result['data'] = $userData;
     } else {
         $result['error'] = true;
@@ -53,6 +54,7 @@ function createSession($userData)
 function clearSession()
 {
     unset(
+        $_SESSION['id'],
         $_SESSION['login'],
         $_SESSION['name'],
         $_SESSION['lastname'],
