@@ -48,7 +48,8 @@ function executePrepareQuery($sql, $params, $close){
     $stmt->execute();
 
     if($close){
-        $result = $mysqli->affected_rows;
+        $result = $mysqli->insert_id;
+//        $result = $mysqli->affected_rows;
 //        var_dump($stmt->insert_id);
     } else {
         $meta = $stmt->result_metadata();
