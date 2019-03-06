@@ -5,10 +5,20 @@
 // const gallery = new Gallery(block);
 
 window.onload = () => {
-  document.getElementById('valid').addEventListener('submit', e => {
-    // let valid = new Validator('valid');
-    // if (!valid.valid){
-    //   e.preventDefault();
-    // }
+  $('valid').on('submit', e => {
+    let valid = new Validator('valid');
+    if (!valid.valid){
+      e.preventDefault();
+    }
+  })
+
+  const cart = new Cart('/api/cart/php');
+
+  $('.products__catalog').on('click', (evt) => {
+    if (!evt.target.classList.contains('btn-buy')) {
+      return;
+    }
+    evt.preventDefault();
+    cart.addProduct(evt.target);
   })
 };

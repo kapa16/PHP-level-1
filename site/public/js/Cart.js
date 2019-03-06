@@ -23,6 +23,9 @@ class Cart {
             })
     }
     _render(){
+        let $cartListDiv = $('<div/>', {
+            class: 'cart-items-list'
+        });
         let $cartItemsDiv = $('<div/>', {
             class: 'cart-items-wrap'
         });
@@ -33,9 +36,10 @@ class Cart {
             class: 'cart-summary sum-price'
         });
         $(this.container).text('Корзина');
-        $cartItemsDiv.appendTo($(this.container));
-        $totalGoods.appendTo($(this.container));
-        $totalPrice.appendTo($(this.container));
+        $cartItemsDiv.appendTo($cartListDiv);
+        $totalGoods.appendTo($cartListDiv);
+        $totalPrice.appendTo($cartListDiv);
+        $cartListDiv.appendTo($(this.container));
     }
     _addEventHandlers(){
         $(this.container).on('click', '.reduce-quantity', evt => this._onChangeQuantity(evt,-1));
