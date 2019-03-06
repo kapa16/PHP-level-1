@@ -48,3 +48,4 @@ require_once ENGINE_DIR . 'reviews.php';
 require_once ENGINE_DIR . 'products.php';
 require_once ENGINE_DIR . 'products_crud.php';
 require_once ENGINE_DIR . 'users.php';
+require_once ENGINE_DIR . 'cart.php';
