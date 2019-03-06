@@ -4,7 +4,7 @@
             Логин:
             <input type="text" name="login" class="form-control" placeholder="Логин">
             <div class="invalid-feedback">
-                Лгин должен быть от 6 до 20 символов и содержать латинские буквы и цифры
+                Лгин должен быть от 4 до 20 символов и содержать латинские буквы и цифры
             </div>
         </label>
         <label class="col">

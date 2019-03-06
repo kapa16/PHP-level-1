@@ -11,8 +11,9 @@
     <title>{{TITLE}}</title>
 </head>
 <body>
-<nav class="container">
+<nav class="container navbar">
     {{MAINMENU}}
+    <div id="cart"></div>
 </nav>
 
 <header class="container">
@@ -30,8 +31,10 @@
 </footer>
 
 
+<script src="js/jquery-3.3.1.js"></script>
 <script src="js/Gallery.js"></script>
 <script src="js/Validator.js"></script>
+<script src="js/Cart.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
