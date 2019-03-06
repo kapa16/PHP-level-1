@@ -6,7 +6,7 @@ class Validator {
             password: /^[a-zA-Z0-9]{3,20}$/,
             // password: /(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/,
             passwordCheck: '',
-            login: /^[a-zA-Z0-9]{6,20}$/,
+            login: /^[a-zA-Z0-9]{4,20}$/,
             email: /^[\w._-]+@\w+\.\w{2,4}$/i
         };
 
