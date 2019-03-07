@@ -90,4 +90,11 @@ function refValues($arr){
     }
     return $arr;
 }
-?>
+
+function mysqlEscapeString($params) {
+    $link = createConnection();
+    foreach ($params as $key => $value) {
+        $params[$key] = mysqli_real_escape_string($link, $value);
+    }
+    mysqli_close($link);
+}

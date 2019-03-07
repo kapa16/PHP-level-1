@@ -2,9 +2,10 @@
 
 function getDataFromPost($postParams, $fields)
 {
+    mysqlEscapeString($postParams);
     $data = [];
     foreach ($fields as $field) {
-        $data[$field] = empty($postParams[$field]) ? '' : $postParams[$field];
+        $data[$field] = $postParams[$field] ?? '';
     }
     return $data;
 }
