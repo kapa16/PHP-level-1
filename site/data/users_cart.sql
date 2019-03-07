@@ -24,6 +24,9 @@ COMMIT;
 ALTER TABLE `users`
   ADD UNIQUE INDEX `login` (`login`);
 
+INSERT INTO `users` (`login`, `email`, `name`, `lastname`, `password`)
+VALUES ('nologin', 'nologin', 'nologin', 'nologin', 'nologin');
+
 CREATE TABLE `cart`
 (
   `id`    int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
