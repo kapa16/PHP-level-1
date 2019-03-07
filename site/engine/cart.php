@@ -2,7 +2,7 @@
 
 function getCart(int $userId)
 {
-    $sql = 'SELECT * FROM `geek_brains_shop`.`cart` WHERE `user_id`=' . $userId . ';';
+    $sql = 'SELECT * FROM `cart` WHERE `user_id`=' . $userId . ';';
     return getAssocData($sql)[0];
 }
 
@@ -12,13 +12,14 @@ function getCartProducts(int $userId)
     if (!$cart) {
         return null;
     }
+    $sql = "SELECT `cart_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price` FROM `cart_product` LEFT JOIN `products` ON `products`.`id` = `cart_product`.`product_id` WHERE `cart_product`.`cart_id`=" . $cart['id'] . ';';
+    return getAssocData($sql);
 }
 
 function createCart(int $userId)
 {
-    $sql = 'INSERT INTO `geek_brains_shop`.`cart` (`user_id`) VALUES (?);';
-    $resultSql = executePrepareQuery($sql, ['d', $userId], true);
-    return $resultSql;
+    $sql = 'INSERT INTO `cart` (`user_id`) VALUES (?);';
+    return executePrepareQuery($sql, ['d', $userId], true);
 }
 
 function addProductToCart(int $userId, $product)
@@ -31,12 +32,26 @@ function addProductToCart(int $userId, $product)
         $cartId = $cart['id'];
     }
 
-    $sql = 'INSERT INTO `geek_brains_shop`.`cart_product` (`cart_id`, `product_id`, `quantity`) VALUES (?, ?, ?);';
-    $resultSql = executePrepareQuery($sql, ['ddd', $cartId, $product['productId'], $product['quantity']], true);
-    return $resultSql;
+    $sql = 'INSERT INTO `cart_product` (`cart_id`, `product_id`, `quantity`) VALUES (?, ?, ?);';
+    return executePrepareQuery($sql, ['ddd', $cartId, +$product['productId'], +$product['quantity']], true);
 }
 
-function deleteCartProduct()
+function deleteCartProduct(int $userId, $product)
 {
+    $cart = getCart($userId);
+    if (!$cart) {
+        return null;
+    }
+    $sql = 'DELETE FROM `cart_product` WHERE `product_id`=' . $product['productId'] . ' AND `cart_id`=' . $cart['id'] . ';';
+    return executeQuery($sql);
+}
 
+function changeQuantityProductCart(int $userId, $product)
+{
+    $cart = getCart($userId);
+    if (!$cart) {
+        return null;
+    }
+    $sql = 'UPDATE `cart_product` SET `quantity` = ' . $product['quantity'] . ' WHERE `product_id`=' . $product['productId'] . ' AND `cart_id`=' . $cart['id'] . ';';
+    return executeQuery($sql);
 }

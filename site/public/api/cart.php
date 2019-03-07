@@ -5,21 +5,35 @@ require_once __DIR__ . '/../../config/config.php';
 if (empty($_REQUEST)) {
     die;
 }
-//header('Content-Type: application/x-javascript; charset=utf8');
+
 $userId = empty($_SESSION['id']) ? 1 : $_SESSION['id'];
 
-if ($_REQUEST['apiMethod'] === 'getCart') {
+switch ($_REQUEST['apiMethod']) {
+    case 'getCart':
+        {
 
-    $products = getCartProducts($userId);
+            $products = getCartProducts($userId);
 
-    $json = ['contents' => []];
-    if ($products) {
-        $json['contents'] = $products;
-    }
-    echo json_encode($json);
+            $json = ['contents' => []];
+            if ($products) {
+                $json['contents'] = $products;
+            }
+            echo json_encode($json);
+        }
+        break;
+    case 'addToCart':
+        {
+            echo addProductToCart($userId, $_REQUEST['postData']);
+        }
+        break;
+    case 'changeQuantityProductCart':
+        {
+            echo changeQuantityProductCart($userId, $_REQUEST['postData']);
+        }
+        break;
+    case 'deleteFromCart':
+        {
+            deleteCartProduct($userId, $_REQUEST['postData']);
+        }
+        break;
 }
-
-if ($_REQUEST['apiMethod'] === 'addToCart') {
-    addProductToCart($userId, $_REQUEST['postData']);
-}
-
