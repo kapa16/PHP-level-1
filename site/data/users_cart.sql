@@ -51,3 +51,9 @@ ALTER TABLE `cart_product`
     REFERENCES `cart` (`id`)
     ON UPDATE CASCADE
     ON DELETE RESTRICT;
+
+ALTER TABLE `cart`
+  ADD COLUMN (`create_data` DATETIME DEFAULT NOW(), `change_data` DATETIME DEFAULT NOW());
+
+ALTER TABLE `cart_product`
+  ADD COLUMN (`create_data` DATETIME DEFAULT NOW(), `change_data` DATETIME DEFAULT NOW());
