@@ -141,7 +141,10 @@ class Cart {
       },
       success: (data) => {
         console.log(data);
-      }
+      },
+      error: (error) => {
+        console.log(error)
+      },
     })
   }
 
