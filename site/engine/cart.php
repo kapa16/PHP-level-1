@@ -12,7 +12,10 @@ function getCartProducts(int $userId)
     if (!$cart) {
         return null;
     }
-    $sql = "SELECT `cart_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price` FROM `cart_product` LEFT JOIN `products` ON `products`.`id` = `cart_product`.`product_id` WHERE `cart_product`.`cart_id`=" . $cart['id'] . ';';
+    $sql = "SELECT `cart_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price` 
+        FROM `cart_product` 
+        LEFT JOIN `products` ON `products`.`id` = `cart_product`.`product_id` 
+        WHERE `cart_product`.`cart_id`=" . $cart['id'] . ';';
     return getAssocData($sql);
 }
 
@@ -32,7 +35,8 @@ function addProductToCart(int $userId, $product)
         $cartId = $cart['id'];
     }
 
-    $sql = 'INSERT INTO `cart_product` (`cart_id`, `product_id`, `quantity`) VALUES (?, ?, ?);';
+    $sql = 'INSERT INTO `cart_product` (`cart_id`, `product_id`, `quantity`) 
+        VALUES (?, ?, ?);';
     return executePrepareQuery($sql, ['ddd', $cartId, +$product['productId'], +$product['quantity']], true);
 }
 
@@ -42,7 +46,9 @@ function deleteCartProduct(int $userId, $product)
     if (!$cart) {
         return null;
     }
-    $sql = 'DELETE FROM `cart_product` WHERE `product_id`=' . $product['productId'] . ' AND `cart_id`=' . $cart['id'] . ';';
+    $sql = 'DELETE FROM `cart_product` 
+        WHERE `product_id`=' . $product['productId'] . ' 
+        AND `cart_id`=' . $cart['id'] . ';';
     return executeQuery($sql);
 }
 
@@ -52,6 +58,9 @@ function changeQuantityProductCart(int $userId, $product)
     if (!$cart) {
         return null;
     }
-    $sql = 'UPDATE `cart_product` SET `quantity` = ' . $product['quantity'] . ' WHERE `product_id`=' . $product['productId'] . ' AND `cart_id`=' . $cart['id'] . ';';
+    $sql = 'UPDATE `cart_product` 
+        SET `quantity` = ' . $product['quantity'] . ' 
+        WHERE `product_id`=' . $product['productId'] . ' 
+        AND `cart_id`=' . $cart['id'] . ';';
     return executeQuery($sql);
 }
