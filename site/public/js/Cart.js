@@ -18,13 +18,28 @@ class Cart {
       },
       success: (data) => {
         for (let product of data.contents) {
-                this.cartItems.push(product);
-                this._renderItem(product);
-                this._changeQuantity(product, product.quantity)
-              }
-              this._renderSum();
+          const newProduct = this._convertData(product);
+          this.cartItems.push(newProduct);
+          this._renderItem(newProduct);
+          this._changeQuantity(newProduct, +product.quantity)
+        }
+        this._renderSum();
       }
     });
+  }
+  
+  _convertData(product) {
+    const numberField = ['id_product', 'quantity', 'price'];
+    const newProduct = [];
+    for (const productKey in product) {
+      if (numberField.includes(productKey)) {
+        newProduct[productKey] = +product[productKey];
+      } else {
+        newProduct[productKey] = product[productKey];
+      }
+    }
+    newProduct['quantity'] = 0;
+    return newProduct;
   }
 
   _render() {
@@ -40,7 +55,10 @@ class Cart {
     let $totalPrice = $('<div/>', {
       class: 'cart-summary sum-price'
     });
-    $(this.container).text('Корзина');
+    const $cartHeader = $('<div/>', {
+      class: 'cart-header'
+    }).text(`Корзина (${this.countGoods})`);
+    $(this.container).append($cartHeader);
     $cartItemsDiv.appendTo($cartListDiv);
     $totalGoods.appendTo($cartListDiv);
     $totalPrice.appendTo($cartListDiv);
@@ -75,6 +93,7 @@ class Cart {
   }
 
   _renderSum() {
+    $('.cart-header').text(`Корзина (${this.countGoods})`);
     $('.sum-goods').text(`Всего товаров в корзине: ${this.countGoods}`);
     $('.sum-price').text(`Общая сумма: ${this.amount} руб.`);
   }
@@ -105,23 +124,23 @@ class Cart {
       this._renderItem(product);
       this.amount += product.price;
       this.countGoods += product.quantity;
-      this._sendToServer(product);
+      this._sendToServer(product, 'addToCart');
     }
     this._renderSum();
   }
 
-  _sendToServer(product) {
+  _sendToServer(product, methodName) {
     $.post({
       url: this.source,
       data: {
-        apiMethod: 'addToCart',
+        apiMethod: methodName,
         postData: {
           productId: product.id_product,
           quantity: product.quantity
         }
       },
       success: (data) => {
-
+        console.log(data);
       }
     })
   }
@@ -140,17 +159,18 @@ class Cart {
     this.countGoods += quantity;
     this.amount += cartItem.price * quantity;
     if (cartItem.quantity === 0) {
-      this._remove(cartItem.id_product)
+      this._remove(cartItem);
+      this._sendToServer(cartItem, 'deleteFromCart');
     } else {
       this._updateCart(cartItem);
+      this._sendToServer(cartItem, 'changeQuantityProductCart');
     }
     this._renderSum();
   }
 
-  _remove(id) {
-    let find = this._getCartItem(id);
-    this.cartItems.splice(this.cartItems.indexOf(find), 1);
-    let $container = $(`div[data-product="${id}"]`);
+  _remove(cartItem) {
+    this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
+    let $container = $(`div[data-product="${cartItem['id_product']}"]`);
     $container.remove();
   }
 }
