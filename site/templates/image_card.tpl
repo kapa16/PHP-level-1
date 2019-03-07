@@ -1,4 +1,4 @@
-<div class="gallery__image-wrap">
+<div class="gallery__image-wrap col-xs-12 col-md-4">
     <a href="image_view.php?photo-id={{IMAGEID}}">
         <img
                 src="{{IMAGESOURCE}}"
