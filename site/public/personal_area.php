@@ -14,8 +14,8 @@ $personalAreaData = [
 
 $loginHtml = render(PERSONAL_AREA_TEMPLATE, $personalAreaData);
 
-$templateData['title'] = 'Shop login';
-$templateData['header'] = 'Вход';
+$templateData['title'] = 'Shop';
+$templateData['header'] = 'Личный кабинет';
 $templateData['content'] = $loginHtml;
 
 echo render(INDEX_TEMPLATE, $templateData);
