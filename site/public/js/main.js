@@ -5,12 +5,12 @@
 // const gallery = new Gallery(block);
 
 window.onload = () => {
-  $('valid').on('submit', e => {
+  $('#valid').on('submit', e => {
     let valid = new Validator('valid');
     if (!valid.valid){
       e.preventDefault();
     }
-  })
+  });
 
   const cart = new Cart('/api/cart.php');
 

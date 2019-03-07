@@ -24,7 +24,7 @@ function registrationUser($postParams)
         return $result;
     }
 
-    $sql = 'INSERT INTO `users` (`login`, `email`, `name`, `lastname`, `password`) VALUES (?, ?, ?, ?, ?)';
+    $sql = 'INSERT INTO `users` (`login`, `email`, `name`, `lastname`, `password`) VALUES (?, ?, ?, ?, ?);';
     $resultSql = executePrepareQuery($sql, array_merge(['sssss'], $userData), true);
     if ($resultSql) {
         unset($userData['password']);
