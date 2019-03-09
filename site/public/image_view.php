@@ -19,14 +19,9 @@ $views = +$image['views'] + 1;
 $imagesHtml = getHtmlImage($image, IMAGE_VIEW_TEMPLATE);
 $galleryHtml = getHtmlGallery($imagesHtml);
 
-$templateData = [
-    'title'         => 'Gallery',
-    'header'        => 'Просмотр полноразмерного изображения',
-    'currentYear'   => date('Y'),
-    'content'       => $galleryHtml,
-    'reviewsHeader' => '',
-    'reviews'       => '',
-];
+$templateData['title'] = 'Gallery';
+$templateData['header'] = 'Просмотр полноразмерного изображения';
+$templateData['content'] = $galleryHtml;
 
 echo render(INDEX_TEMPLATE, $templateData);
 
