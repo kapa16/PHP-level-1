@@ -21,4 +21,21 @@ window.onload = () => {
     evt.preventDefault();
     cart.addProduct(evt.target);
   })
+
+  //--------------order control-------------
+  $('.order__status_change').on('click', (evt) => {
+    // evt.preventDefault();
+    const orderId = $(evt.target).data('id');
+    const orderStatus = parseInt($(evt.target).parent().find('option:selected').val());
+    $.post({
+      url: '/api/order.php',
+      data: {
+        apiMethod: 'changeOrderStatus',
+        postData: {
+          id: orderId,
+          status: orderStatus
+        }
+      }
+    })
+  })
 };

@@ -30,9 +30,7 @@ foreach ($orders as $order) {
         if ($order['status_id'] === $id) {
             $selected = 'selected ';
         }
-//        var_dump($orderStatus, $id, $order['status_id'], $status);
-//        die;
-        $orderStatusesHtml .= "<option {$selected} vlaue='{$id}'>{$status}</option>";
+        $orderStatusesHtml .= "<option {$selected}>{$id}. {$status}</option>";
     }
 
 

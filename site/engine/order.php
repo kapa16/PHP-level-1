@@ -10,14 +10,16 @@ function getUserOrders(int $userId)
 {
     $sql = "SELECT `order`.`id`, os.`status` FROM `order` 
         LEFT JOIN `order_status` os ON `order`.`status_id` = os.`id` 
-        WHERE `user_id`='{$userId}';";
+        WHERE `user_id`='{$userId}'
+        ORDER BY `create_data`;";
     return getAssocData($sql);
 }
 
 function getOrders()
 {
     $sql = 'SELECT `order`.`id`, os.`status`, `status_id` FROM `order` 
-        LEFT JOIN `order_status` os ON `order`.`status_id` = os.`id`;';
+        LEFT JOIN `order_status` os ON `order`.`status_id` = os.`id`
+        ORDER BY `create_data`;';
     return getAssocData($sql);
 }
 
@@ -43,27 +45,10 @@ function addProductToOrder($orderId, $productId, $quantity)
     return executeQuery($sql);
 }
 
-//function deleteOrderProduct(int $userId, $product)
-//{
-//    $order = getOrder($userId);
-//    if (!$order) {
-//        return null;
-//    }
-//    $sql = 'DELETE FROM `order_product`
-//        WHERE `product_id`=' . $product['productId'] . '
-//        AND `order_id`=' . $order['id'] . ';';
-//    return executeQuery($sql);
-//}
-//
-//function changeQuantityProductOrder(int $userId, $product)
-//{
-//    $order = getOrder($userId);
-//    if (!$order) {
-//        return null;
-//    }
-//    $sql = 'UPDATE `order_product`
-//        SET `quantity` = ' . $product['quantity'] . '
-//        WHERE `product_id`=' . $product['productId'] . '
-//        AND `order_id`=' . $order['id'] . ';';
-//    return executeQuery($sql);
-//}
+function changeOrderStatus($orderId, $orderStatus)
+{
+    $sql = "UPDATE `order` 
+        SET `status_id`={$orderStatus}, `change_data`=NOW()
+        WHERE `id`={$orderId};";
+    return executeQuery($sql);
+}
