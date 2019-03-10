@@ -74,6 +74,6 @@ function loginUser($postParams)
     return false;
 }
 
-function adminCheck() {
+function getAdminRole() {
     return $_SESSION['login']['role'] ?? 0;
 }

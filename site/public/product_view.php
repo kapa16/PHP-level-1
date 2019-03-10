@@ -16,7 +16,7 @@ if (!$product) {
     die;
 }
 
-$userAdmin = $_SESSION['login']['role'] ?? 0;
+$userAdmin = getAdminRole();
 if ($userAdmin) {
     $product['productControl'] = render(PRODUCT_CONTROL_TEMPLATE, [$product['id']]);
 } else {

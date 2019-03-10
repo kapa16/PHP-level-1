@@ -25,7 +25,7 @@ function getHtmlProducts($products)
 function getHtmlCatalog($catalogHtml)
 {
     $catalogData = ['productsCatalog' => $catalogHtml];
-    if (adminCheck()) {
+    if (getAdminRole()) {
         $catalogData['productAdd'] = render(PRODUCT_ADD_TEMPLATE);
     } else {
         $catalogData['productAdd'] = '';
