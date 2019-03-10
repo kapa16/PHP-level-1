@@ -41,7 +41,7 @@ function registrationUser($postParams)
 
 function findUser($userLogin)
 {
-    $sql = "SELECT * FROM `users` WHERE `login`='" . $userLogin . "';";
+    $sql = "SELECT * FROM `users` WHERE `login`='{$userLogin}';";
     return getAssocData($sql);
 }
 

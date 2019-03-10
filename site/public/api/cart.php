@@ -24,7 +24,7 @@ if (empty($_REQUEST['apiMethod'])) {
     die;
 }
 
-$userId = $_SESSION['id'] ?? 0;
+$userId = $_SESSION['login']['id'] ?? 0;
 $cart = $_COOKIE['cart'] ?? [];
 
 $productId = $_REQUEST['postData']['productId'] ?? 0;

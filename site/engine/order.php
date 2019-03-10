@@ -8,21 +8,8 @@ function getUserOrders(int $userId)
     return getAssocData($sql);
 }
 
-//function getOrderProducts(int $userId)
-//{
-//    $order = getOrder($userId);
-//    if (!$order) {
-//        return null;
-//    }
-//    $sql = "SELECT `order_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price`
-//        FROM `order_product`
-//        LEFT JOIN `products` ON `products`.`id` = `order_product`.`product_id`
-//        WHERE `order_product`.`order_id`=" . $order['id'] . ';';
-//    return getAssocData($sql);
-//}
-
 function getOrderProducts(int $orderId) {
-    $sql = "SELECT `order_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price`
+    $sql = "SELECT `products`.`id` AS 'id', `name`, `quantity`, `price`
         FROM `order_product`
         LEFT JOIN `products` ON `products`.`id` = `order_product`.`product_id`
         WHERE `order_product`.`order_id`=" . $orderId . ';';

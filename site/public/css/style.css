@@ -120,4 +120,12 @@
   text-align: right;
 }
 
+.table_row {
+  border-bottom: 1px solid gray;
+  text-align: center;
+}
+.table_column {
+  padding: 5px;
+}
+
 /*# sourceMappingURL=style.css.map */

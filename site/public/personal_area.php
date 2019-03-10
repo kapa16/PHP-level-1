@@ -5,18 +5,23 @@ require_once __DIR__ . '/../config/config.php';
 if (empty($_SESSION['login'])) {
     header('Location: /');
 }
+$user = $_SESSION['login'];
 
-$userId = $_SESSION['login']['id'] ?? 0;
+$userId = $user['id'] ?? 0;
 
 $orders = getUserOrders($userId);
+$ordersHtml = '';
 foreach ($orders as $order) {
     $orderProducts = getOrderProducts($order['id']);
+    $orderProductsHtml = '';
     foreach ($orderProducts as $product) {
         $orderProductsData = [
             'name' => $product['name'],
-            'quantity' => $product['status'],
+            'quantity' => $product['quantity'],
+            'price' => $product['price'],
+            'sum' => $product['quantity'] * $product['price'],
         ];
-        $orderProductsHtml = render(ORDER_PRODUCTS, $orderProductsData);
+        $orderProductsHtml .= render(ORDER_PRODUCTS, $orderProductsData);
     }
 
     $orderData = [
@@ -24,14 +29,14 @@ foreach ($orders as $order) {
         'orderStatus' => mb_strtolower($order['status']),
         'orderProducts' => $orderProductsHtml,
     ];
-    $ordersHtml = render(ORDERS_LIST, $orderData);
+    $ordersHtml .= render(ORDERS_LIST, $orderData);
 }
 
 
 $personalAreaData = [
     'personalAreaText'  => 'Добро пожаловать в наш магазин',
-    'personalAreaName'  => $_SESSION['name'],
-    'personalAreaLogin' => $_SESSION['login'],
+    'personalAreaName'  => $user['name'],
+    'personalAreaLogin' => $user['login'],
     'orders'            => $ordersHtml,
 ];
 
