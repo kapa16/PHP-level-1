@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../config/config.php');
+require_once __DIR__ . '/../config/config.php';
 
 if (empty($_GET['photo-id'])) {
     header('Location: /');
