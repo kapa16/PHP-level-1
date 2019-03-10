@@ -1,5 +1,11 @@
 <?php
 
+function getOrderStatusList()
+{
+    $sql = 'SELECT * FROM `order_status`;';
+    return getAssocData($sql);
+}
+
 function getUserOrders(int $userId)
 {
     $sql = "SELECT `order`.`id`, os.`status` FROM `order` 
@@ -8,11 +14,19 @@ function getUserOrders(int $userId)
     return getAssocData($sql);
 }
 
-function getOrderProducts(int $orderId) {
+function getOrders()
+{
+    $sql = 'SELECT `order`.`id`, os.`status`, `status_id` FROM `order` 
+        LEFT JOIN `order_status` os ON `order`.`status_id` = os.`id`;';
+    return getAssocData($sql);
+}
+
+function getOrderProducts(int $orderId)
+{
     $sql = "SELECT `products`.`id` AS 'id', `name`, `quantity`, `price`
         FROM `order_product`
         LEFT JOIN `products` ON `products`.`id` = `order_product`.`product_id`
-        WHERE `order_product`.`order_id`=" . $orderId . ';';
+        WHERE `order_product`.`order_id`={$orderId};";
     return getAssocData($sql);
 }
 

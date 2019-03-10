@@ -28,6 +28,7 @@ foreach ($orders as $order) {
         'orderId' => $order['id'],
         'orderStatus' => mb_strtolower($order['status']),
         'orderProducts' => $orderProductsHtml,
+        'adminOrderControl' => '',
     ];
     $ordersHtml .= render(ORDERS_LIST, $orderData);
 }
