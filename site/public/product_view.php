@@ -16,7 +16,14 @@ if (!$product) {
     die;
 }
 
-$productHtml = getHtmlProduct($product, PRODUCT_VIEW_TEMPLATE);
+$userAdmin = $_SESSION['login']['role'] ?? 0;
+if ($userAdmin) {
+    $product['productControl'] = render(PRODUCT_CONTROL_TEMPLATE, [$product['id']]);
+} else {
+    $product['productControl'] = '';
+}
+
+$productHtml = getHtmlProduct(PRODUCT_VIEW_TEMPLATE, $product);
 $viewHtml = getHtmlCatalog($productHtml);
 
 $templateData['title'] = 'Product';

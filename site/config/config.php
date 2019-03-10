@@ -43,6 +43,8 @@ define('REVIEW_CONTAINER_TEMPLATE', TEMPLATE_DIR . 'reviews_container.tpl');
 define('PRODUCTS_CATALOG_TEMPLATE', TEMPLATE_DIR . 'product_catalog.tpl');
 define('PRODUCT_CARD_TEMPLATE', TEMPLATE_DIR . 'product_card.tpl');
 define('PRODUCT_VIEW_TEMPLATE', TEMPLATE_DIR . 'product_view.tpl');
+define('PRODUCT_CONTROL_TEMPLATE', TEMPLATE_DIR . 'product_control.tpl');
+define('PRODUCT_ADD_TEMPLATE', TEMPLATE_DIR . 'product_add.tpl');
 
 //---------Load engine------------
 require_once ENGINE_DIR . 'menu.php';

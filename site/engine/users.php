@@ -73,3 +73,7 @@ function loginUser($postParams)
 
     return false;
 }
+
+function adminCheck() {
+    return $_SESSION['login']['role'] ?? 0;
+}
