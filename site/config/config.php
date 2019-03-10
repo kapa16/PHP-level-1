@@ -15,6 +15,8 @@ define('DB_USER', 'geek_brains');
 define('DB_PASS', '123123');
 define('DB_NAME', 'geek_brains_shop');
 
+define('TABLE_PRODUCT', 'products');
+
 //---------Sort methods------------
 define('SORT_BY_ID', 'id');
 define('SORT_BY_DATE', 'date');
@@ -26,7 +28,10 @@ define('SORT_BY_VIEWS', 'views');
 define('INDEX_TEMPLATE', TEMPLATE_DIR . 'index.tpl');
 define('LOGIN_TEMPLATE', TEMPLATE_DIR . 'login.tpl');
 define('REGISTRATION_TEMPLATE', TEMPLATE_DIR . 'registration.tpl');
+
 define('PERSONAL_AREA_TEMPLATE', TEMPLATE_DIR . 'personal_area.tpl');
+define('ORDERS', TEMPLATE_DIR . 'orders_list.tpl');
+define('ORDER_PRODUCTS', TEMPLATE_DIR . 'order_products.tpl');
 
 define('IMAGE_GALLERY_TEMPLATE', TEMPLATE_DIR . 'gallery.tpl');
 define('IMAGE_CARD_TEMPLATE', TEMPLATE_DIR . 'image_card.tpl');
@@ -48,4 +53,4 @@ require_once ENGINE_DIR . 'reviews.php';
 require_once ENGINE_DIR . 'products.php';
 require_once ENGINE_DIR . 'products_crud.php';
 require_once ENGINE_DIR . 'users.php';
-require_once ENGINE_DIR . 'cart.php';
+require_once ENGINE_DIR . 'order.php';

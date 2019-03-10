@@ -6,10 +6,13 @@ if (empty($_SESSION['login'])) {
     header('Location: /');
 }
 
+$ordersHtml = render(PERSONAL_AREA_TEMPLATE, $personalAreaData);
+
 $personalAreaData = [
   'personalAreaText' => 'Добро пожаловать в наш магазин',
   'personalAreaName' => $_SESSION['name'],
   'personalAreaLogin' => $_SESSION['login'],
+  'orders' => $ordersHtml,
 ];
 
 $loginHtml = render(PERSONAL_AREA_TEMPLATE, $personalAreaData);

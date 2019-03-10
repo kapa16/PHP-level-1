@@ -30,9 +30,9 @@ function readRecords($tableName, $sort = SORT_BY_ID, $directionSort = 'DESC')
     return getAssocData($query);
 }
 
-function readRecord($tableName, $recordId)
+function readRecordsByIdList($tableName, $recordId)
 {
-    $query = 'SELECT * FROM `' . $tableName . '` WHERE `id`=' . $recordId . ';';
+    $query = 'SELECT * FROM `' . $tableName . '` WHERE `id` IN (' . $recordId . ');';
     return getAssocData($query);
 }
 

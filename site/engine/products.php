@@ -28,12 +28,12 @@ function getHtmlCatalog($catalogHtml)
 
 function getProducts()
 {
-    return readRecords('products', SORT_BY_NAME);
+    return readRecords(TABLE_PRODUCT, SORT_BY_NAME);
 }
 
 function getProduct($productId)
 {
-    return readRecord('products', $productId)[0];
+    return readRecordsByIdList(TABLE_PRODUCT, $productId)[0];
 
 }
 
