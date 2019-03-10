@@ -31,6 +31,13 @@ if (empty($_SESSION['login'])) {
     ];
 }
 
+if (getAdminRole()) {
+    $menuContent[] = [
+        'title' => 'Админка',
+        'link'  => '/admin_page.php',
+    ];
+}
+
 function createMenu($menuContent)
 {
     $html = '<ul  class="nav">';
