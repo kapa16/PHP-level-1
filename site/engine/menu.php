@@ -22,7 +22,7 @@ if (empty($_SESSION['login'])) {
     ];
 } else {
     $menuContent[] = [
-        'title' => 'Привет, ' . $_SESSION['name'],
+        'title' => 'Привет, ' . $_SESSION['login']['name'] ?? '',
         'link'  => '/personal_area.php',
     ];
     $menuContent[] = [

@@ -47,21 +47,12 @@ function findUser($userLogin)
 
 function createSession($userData)
 {
-
-    foreach ($userData as $paramName => $data) {
-        $_SESSION[$paramName] = $data;
-    }
+    $_SESSION['login'] = $userData;
 }
 
 function clearSession()
 {
-    unset(
-        $_SESSION['id'],
-        $_SESSION['login'],
-        $_SESSION['name'],
-        $_SESSION['lastname'],
-        $_SESSION['email']
-    );
+    unset($_SESSION['login']);
 }
 
 function loginUser($postParams)

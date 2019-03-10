@@ -1,4 +1,4 @@
-<h3>Заказ №{{ORDERID}}</h3>
+<h3>Заказ №{{ORDERID}}, статус: {{ORDERSTATUS}}</h3>
 <table>
     <tr>
         <th>Товар</th>

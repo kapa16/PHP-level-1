@@ -30,7 +30,7 @@ define('LOGIN_TEMPLATE', TEMPLATE_DIR . 'login.tpl');
 define('REGISTRATION_TEMPLATE', TEMPLATE_DIR . 'registration.tpl');
 
 define('PERSONAL_AREA_TEMPLATE', TEMPLATE_DIR . 'personal_area.tpl');
-define('ORDERS', TEMPLATE_DIR . 'orders_list.tpl');
+define('ORDERS_LIST', TEMPLATE_DIR . 'orders_list.tpl');
 define('ORDER_PRODUCTS', TEMPLATE_DIR . 'order_products.tpl');
 
 define('IMAGE_GALLERY_TEMPLATE', TEMPLATE_DIR . 'gallery.tpl');

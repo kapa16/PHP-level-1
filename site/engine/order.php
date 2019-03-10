@@ -1,11 +1,13 @@
 <?php
 
-//function getOrder(int $userId)
-//{
-//    $sql = 'SELECT * FROM `order` WHERE `user_id`=' . $userId . ';';
-//    return getAssocData($sql)[0];
-//}
-//
+function getUserOrders(int $userId)
+{
+    $sql = "SELECT `order`.`id`, os.`status` FROM `order` 
+        LEFT JOIN `order_status` os ON `order`.`status_id` = os.`id` 
+        WHERE `user_id`='{$userId}';";
+    return getAssocData($sql);
+}
+
 //function getOrderProducts(int $userId)
 //{
 //    $order = getOrder($userId);
@@ -18,6 +20,14 @@
 //        WHERE `order_product`.`order_id`=" . $order['id'] . ';';
 //    return getAssocData($sql);
 //}
+
+function getOrderProducts(int $orderId) {
+    $sql = "SELECT `order_id` , `products`.`id` AS 'id_product', `products`.`name` AS 'product_name', `quantity`, `price`
+        FROM `order_product`
+        LEFT JOIN `products` ON `products`.`id` = `order_product`.`product_id`
+        WHERE `order_product`.`order_id`=" . $orderId . ';';
+    return getAssocData($sql);
+}
 
 function createOrder(int $userId)
 {
