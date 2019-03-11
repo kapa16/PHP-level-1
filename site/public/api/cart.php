@@ -48,8 +48,7 @@ switch ($_REQUEST['apiMethod']) {
             error('Корзина пуста');
         }
         if (!$userId) {
-            header('Location: /login.php');
-            error('Для создания заказа необходимо авторизоваться');
+            error('Для создания заказа необходимо авторизоваться', '/login.php');
         }
 
         $orderId = createOrder($userId);
@@ -62,7 +61,7 @@ switch ($_REQUEST['apiMethod']) {
             setcookie("cart[{$id}]", null, time() - 3600);
         }
 
-        success();
+        success('/personal_area.php');
         break;
 }
 

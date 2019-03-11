@@ -72,9 +72,12 @@ class Cart {
   }
 
   _addEventHandlers() {
-    $(this.container).on('click', '.reduce-quantity', evt => this._onChangeQuantity(evt, -1));
-    $(this.container).on('click', '.increase-quantity', evt => this._onChangeQuantity(evt, 1));
-    $(this.container).on('click', '.delete-product', evt => this._onChangeQuantity(evt, 0, true));
+    $(this.container).on('click', '.reduce-quantity', evt =>
+      this._onChangeQuantity(evt, -1));
+    $(this.container).on('click', '.increase-quantity', evt =>
+      this._onChangeQuantity(evt, 1));
+    $(this.container).on('click', '.delete-product', evt =>
+      this._onChangeQuantity(evt, 0, true));
   }
 
   _renderItem(product) {
@@ -150,10 +153,18 @@ class Cart {
         postData: postData
       },
       success: (data) => {
-        // console.log(data);
+        data = JSON.parse(data);
+        if (data.location) {
+          window.location.replace(data.location);
+        }
+        console.log(data);
       },
       error: (error) => {
-        // console.log(error)
+        error = JSON.parse(error);
+        if (error.location) {
+          window.location.replace(error.location);
+        }
+        console.log(error)
       },
     })
   }
