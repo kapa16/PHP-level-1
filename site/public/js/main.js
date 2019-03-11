@@ -24,9 +24,11 @@ window.onload = () => {
 
   //--------------order control-------------
   $('.order__status_change').on('click', (evt) => {
-    // evt.preventDefault();
+    evt.preventDefault();
     const orderId = $(evt.target).data('id');
+    let orderStatusFull = $(evt.target).parent().find('option:selected').val();
     const orderStatus = parseInt($(evt.target).parent().find('option:selected').val());
+    orderStatusFull = orderStatusFull.replace( /\d+\.\s/g, "" ).toLowerCase();
     $.post({
       url: '/api/order.php',
       data: {
@@ -35,6 +37,9 @@ window.onload = () => {
           id: orderId,
           status: orderStatus
         }
+      },
+      success: () => {
+        $(evt.target).closest('.order_wrapper').find('.order_status').text(orderStatusFull);
       }
     })
   });
