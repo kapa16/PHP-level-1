@@ -45,12 +45,12 @@ function findUser($userLogin)
     return getAssocData($sql);
 }
 
-function createSession($userData)
+function authUser($userData)
 {
     $_SESSION['login'] = $userData;
 }
 
-function clearSession()
+function authAuthUser()
 {
     unset($_SESSION['login']);
 }

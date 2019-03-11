@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     if (!$result) {
         echo 'Ошибка авторизации';
     } else {
-        createSession($result);
+        authUser($result);
         header('Location: /');
     }
 }

@@ -7,7 +7,7 @@ if (!empty($_POST)) {
     if ($result['error']) {
         echo $result['data'];
     } else {
-        createSession($result['data']);
+        authUser($result['data']);
         header('Location: /');
     }
 }

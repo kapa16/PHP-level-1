@@ -40,7 +40,7 @@ switch ($_REQUEST['apiMethod']) {
         if (!$productId) {
             error('ID товара не передан');
         }
-        setcookie("cart[{$productId}]", null, time() - 3600);
+        setcookie("cart[{$productId}]", null, 1);
         success();
         break;
     case 'createOrder':
@@ -58,7 +58,7 @@ switch ($_REQUEST['apiMethod']) {
 
         $productsId = array_keys($cart);
         foreach ($productsId as $id) {
-            setcookie("cart[{$id}]", null, time() - 3600);
+            setcookie("cart[{$id}]", null, 1);
         }
 
         success('/personal_area.php');
