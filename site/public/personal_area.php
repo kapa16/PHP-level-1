@@ -13,16 +13,7 @@ $orders = getUserOrders($userId);
 $ordersHtml = '';
 foreach ($orders as $order) {
     $orderProducts = getOrderProducts($order['id']);
-    $orderProductsHtml = '';
-    foreach ($orderProducts as $product) {
-        $orderProductsData = [
-            'name' => $product['name'],
-            'quantity' => $product['quantity'],
-            'price' => $product['price'],
-            'sum' => $product['quantity'] * $product['price'],
-        ];
-        $orderProductsHtml .= render(ORDER_PRODUCTS, $orderProductsData);
-    }
+    $orderProductsHtml = renderOrderProducts($orderProducts);
 
     $orderData = [
         'orderId' => $order['id'],

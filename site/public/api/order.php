@@ -6,14 +6,26 @@ if (empty($_REQUEST['apiMethod'])) {
     die;
 }
 
-$orderId = $_REQUEST['postData']['id'] ?? 0;
+$id = $_REQUEST['postData']['id'] ?? 0;
 $orderStatus = $_REQUEST['postData']['status'] ?? 0;
 
 switch ($_REQUEST['apiMethod']) {
     case 'changeOrderStatus':
-        if (!$orderId || !$orderStatus) {
+        if (!$id || !$orderStatus) {
             error('Неверные данные');
         }
-        changeOrderStatus($orderId, $orderStatus);
+        changeOrderStatus($id, $orderStatus);
+        success();
+    case 'deleteProductFromOrder':
+        if (!$id) {
+            error('Не передан ID');
+        }
+        deleteRetrieveProductFromOrder($id, 1);
+        success();
+    case 'retrieveProductFromOrder':
+        if (!$id) {
+            error('Не передан ID');
+        }
+        deleteRetrieveProductFromOrder($id, 0);
         success();
 }

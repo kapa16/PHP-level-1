@@ -25,7 +25,12 @@ function getOrders()
 
 function getOrderProducts(int $orderId)
 {
-    $sql = "SELECT `products`.`id` AS 'id', `name`, `quantity`, `price`
+    $sql = "SELECT `products`.`id` AS 'id', 
+       `name`, 
+       `quantity`, 
+       `price`, 
+       `order_product`.`id` AS 'order_product_id',
+       `order_product`.`deleted` AS 'deleted'
         FROM `order_product`
         LEFT JOIN `products` ON `products`.`id` = `order_product`.`product_id`
         WHERE `order_product`.`order_id`={$orderId};";
@@ -51,4 +56,41 @@ function changeOrderStatus($orderId, $orderStatus)
         SET `status_id`={$orderStatus}, `change_data`=NOW()
         WHERE `id`={$orderId};";
     return executeQuery($sql);
+}
+
+function deleteRetrieveProductFromOrder($orderProductId, $delete)
+{
+    $sql = "UPDATE `order_product` 
+        SET `deleted`={$delete}, `change_data`=NOW()
+        WHERE `id`={$orderProductId};";
+    return executeQuery($sql);
+}
+
+
+function renderOrderProducts($orderProducts)
+{
+    $orderProductsHtml = '';
+    foreach ($orderProducts as $product) {
+        if (empty($product['deleted'])) {
+            $classDeleted = '';
+            $classButton = 'order__product_remove';
+            $buttonText = 'Удалить';
+        } else {
+            $classDeleted = 'table_row_deleted';
+            $classButton = 'order__product_retrieve';
+            $buttonText = 'Вернуть';
+        }
+        $orderProductsData = [
+            'name' => $product['name'],
+            'quantity' => $product['quantity'],
+            'price' => $product['price'],
+            'sum' => $product['quantity'] * $product['price'],
+            'orderProductId' => $product['order_product_id'],
+            'classDeleted' => $classDeleted,
+            'classButton' => $classButton,
+            'buttonText' => $buttonText,
+        ];
+        $orderProductsHtml .= render(ORDER_PRODUCTS, $orderProductsData);
+    }
+    return $orderProductsHtml;
 }

@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../config/config.php';
 
 if (!getAdminRole()) {
-    header('location: /');
+    header('Location: /');
 }
 
 $orderStatuses = getOrderStatusList();
@@ -12,16 +12,7 @@ $orders = getOrders();
 $ordersHtml = '';
 foreach ($orders as $order) {
     $orderProducts = getOrderProducts($order['id']);
-    $orderProductsHtml = '';
-    foreach ($orderProducts as $product) {
-        $orderProductsData = [
-            'name' => $product['name'],
-            'quantity' => $product['quantity'],
-            'price' => $product['price'],
-            'sum' => $product['quantity'] * $product['price'],
-        ];
-        $orderProductsHtml .= render(ORDER_PRODUCTS, $orderProductsData);
-    }
+    $orderProductsHtml = renderOrderProducts($orderProducts);
 
     $orderStatusesHtml = '';
     foreach ($orderStatuses as $orderStatus) {

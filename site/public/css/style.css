@@ -124,6 +124,9 @@
   border-bottom: 1px solid gray;
   text-align: center;
 }
+.table_row_deleted {
+  text-decoration: line-through;
+}
 .table_column {
   padding: 5px;
 }

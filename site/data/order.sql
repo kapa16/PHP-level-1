@@ -65,3 +65,6 @@ ALTER TABLE `order_product`
     REFERENCES `products` (`id`)
     ON UPDATE CASCADE
     ON DELETE RESTRICT;
+
+DROP TABLE `cart_product`;
+DROP TABLE `cart`;
