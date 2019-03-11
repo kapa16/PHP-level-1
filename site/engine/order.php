@@ -43,14 +43,14 @@ function createOrder(int $userId)
     return insert($sql);
 }
 
-function addProductToOrder($orderId, $productId, $quantity)
+function addProductToOrder(int $orderId, int $productId, int $quantity)
 {
     $sql = "INSERT INTO `order_product` (`order_id`, `product_id`, `quantity`) 
         VALUES ({$orderId}, {$productId}, {$quantity});";
     return executeQuery($sql);
 }
 
-function changeOrderStatus($orderId, $orderStatus)
+function changeOrderStatus(int $orderId, int $orderStatus)
 {
     $sql = "UPDATE `order` 
         SET `status_id`={$orderStatus}, `change_data`=NOW()
@@ -58,7 +58,7 @@ function changeOrderStatus($orderId, $orderStatus)
     return executeQuery($sql);
 }
 
-function deleteRetrieveProductFromOrder($orderProductId, $delete)
+function deleteRetrieveProductFromOrder(int $orderProductId, int $delete)
 {
     $sql = "UPDATE `order_product` 
         SET `deleted`={$delete}, `change_data`=NOW()
