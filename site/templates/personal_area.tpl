@@ -13,3 +13,4 @@
         Логин: {{PERSONALAREALOGIN}}
     </div>
 </div>
+{{ORDERS}}

@@ -41,27 +41,18 @@ function registrationUser($postParams)
 
 function findUser($userLogin)
 {
-    $sql = "SELECT * FROM `users` WHERE `login`='" . $userLogin . "';";
+    $sql = "SELECT * FROM `users` WHERE `login`='{$userLogin}';";
     return getAssocData($sql);
 }
 
-function createSession($userData)
+function authUser($userData)
 {
-
-    foreach ($userData as $paramName => $data) {
-        $_SESSION[$paramName] = $data;
-    }
+    $_SESSION['login'] = $userData;
 }
 
-function clearSession()
+function authAuthUser()
 {
-    unset(
-        $_SESSION['id'],
-        $_SESSION['login'],
-        $_SESSION['name'],
-        $_SESSION['lastname'],
-        $_SESSION['email']
-    );
+    unset($_SESSION['login']);
 }
 
 function loginUser($postParams)
@@ -81,4 +72,8 @@ function loginUser($postParams)
     }
 
     return false;
+}
+
+function getAdminRole() {
+    return $_SESSION['login']['role'] ?? 0;
 }

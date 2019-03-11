@@ -2,5 +2,5 @@
 
 require_once __DIR__ . '/../config/config.php';
 
-clearSession();
+authAuthUser();
 header('Location: /');

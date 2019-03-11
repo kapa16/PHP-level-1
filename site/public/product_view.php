@@ -1,6 +1,6 @@
 <?php
 
-require_once(__DIR__ . '/../config/config.php');
+require_once __DIR__ . '/../config/config.php';
 
 if (empty($_GET['product-id'])) {
     header('Location: /products.php');
@@ -16,7 +16,14 @@ if (!$product) {
     die;
 }
 
-$productHtml = getHtmlProduct($product, PRODUCT_VIEW_TEMPLATE);
+$userAdmin = getAdminRole();
+if ($userAdmin) {
+    $product['productControl'] = render(PRODUCT_CONTROL_TEMPLATE, [$product['id']]);
+} else {
+    $product['productControl'] = '';
+}
+
+$productHtml = getHtmlProduct(PRODUCT_VIEW_TEMPLATE, $product);
 $viewHtml = getHtmlCatalog($productHtml);
 
 $templateData['title'] = 'Product';

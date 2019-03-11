@@ -3,8 +3,7 @@
 function createConnection()
 {
     $link = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-    if (!$link)
-    {
+    if (!$link) {
         $error = mysqli_connect_error();
         $errno = mysqli_connect_errno();
         print "$errno: $error\n";
@@ -38,16 +37,28 @@ function getAssocData($query)
     return $data_array;
 }
 
-function executePrepareQuery($sql, $params, $close){
+function insert($query)
+{
+    $link = createConnection();
+
+    mysqli_query($link, $query);
+    $id = mysqli_insert_id($link);
+
+    mysqli_close($link);
+    return $id;
+}
+
+function executePrepareQuery($sql, $params, $close = true)
+{
     $mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
     $stmt = $mysqli->prepare($sql) or die ("Failed to prepared the statement!");
 
-    call_user_func_array(array($stmt, 'bind_param'), refValues($params));
+    call_user_func_array([$stmt, 'bind_param'], refValues($params));
 
     $stmt->execute();
 
-    if($close){
+    if ($close) {
         $result = $mysqli->insert_id;
 //        $result = $mysqli->affected_rows;
 //        var_dump($stmt->insert_id);
@@ -55,16 +66,16 @@ function executePrepareQuery($sql, $params, $close){
         $meta = $stmt->result_metadata();
 
         $parameters = [];
-        while ( $field = $meta->fetch_field() ) {
+        while ($field = $meta->fetch_field()) {
             $parameters[] = &$row[$field->name];
         }
 
-        call_user_func_array(array($stmt, 'bind_result'), refValues($parameters));
+        call_user_func_array([$stmt, 'bind_result'], refValues($parameters));
 
-        $results =[];
-        while ( $stmt->fetch() ) {
-            $x = array();
-            foreach( $row as $key => $val ) {
+        $results = [];
+        while ($stmt->fetch()) {
+            $x = [];
+            foreach ($row as $key => $val) {
                 $x[$key] = $val;
             }
             $results[] = $x;
@@ -76,22 +87,20 @@ function executePrepareQuery($sql, $params, $close){
     $stmt->close();
     $mysqli->close();
 
-    return  $result;
+    return $result;
 }
 
-function refValues($arr){
-    if (strnatcmp(PHP_VERSION,'5.3') >= 0) //Reference is required for PHP 5.3+
-    {
-        $refs = array();
-        foreach($arr as $key => $value) {
-            $refs[$key] = &$arr[$key];
-        }
-        return $refs;
+function refValues($arr)
+{
+    $refs = [];
+    foreach ($arr as $key => $value) {
+        $refs[$key] = &$arr[$key];
     }
-    return $arr;
+    return $refs;
 }
 
-function mysqlEscapeString($params) {
+function mysqlEscapeString($params)
+{
     $link = createConnection();
     foreach ($params as $key => $value) {
         $params[$key] = mysqli_real_escape_string($link, $value);

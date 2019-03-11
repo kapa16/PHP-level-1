@@ -45,7 +45,7 @@ function getImages()
 
 function getImage($imageId)
 {
-    $record = readRecord('images', $imageId)[0];
+    $record = readRecordsByIdList('images', $imageId)[0];
 
     $fullPath = $record['url'];
 

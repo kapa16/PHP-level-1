@@ -1,6 +1,6 @@
 <?php
 
-function getHtmlProduct($product, $templateName)
+function getHtmlProduct($templateName, $product)
 {
     $productData = [
         'productId'          => $product['id'],
@@ -8,6 +8,7 @@ function getHtmlProduct($product, $templateName)
         'productDescription' => $product['description'],
         'productPrice'       => $product['price'],
         'productImageSource' => $product['image'],
+        'productControl'     => $product['productControl'],
     ];
     return render($templateName, $productData);
 }
@@ -16,24 +17,30 @@ function getHtmlProducts($products)
 {
     $catalogHtml = '';
     foreach ($products as $product) {
-        $catalogHtml .= getHtmlProduct($product, PRODUCT_CARD_TEMPLATE);
+        $catalogHtml .= getHtmlProduct(PRODUCT_CARD_TEMPLATE, $product);
     }
     return $catalogHtml;
 }
 
 function getHtmlCatalog($catalogHtml)
 {
-    return render(PRODUCTS_CATALOG_TEMPLATE, ['productsCatalog' => $catalogHtml]);
+    $catalogData = ['productsCatalog' => $catalogHtml];
+    if (getAdminRole()) {
+        $catalogData['productAdd'] = render(PRODUCT_ADD_TEMPLATE);
+    } else {
+        $catalogData['productAdd'] = '';
+    }
+    return render(PRODUCTS_CATALOG_TEMPLATE, $catalogData);
 }
 
 function getProducts()
 {
-    return readRecords('products', SORT_BY_NAME);
+    return readRecords(TABLE_PRODUCT, SORT_BY_NAME);
 }
 
 function getProduct($productId)
 {
-    return readRecord('products', $productId)[0];
+    return readRecordsByIdList(TABLE_PRODUCT, $productId)[0];
 
 }
 

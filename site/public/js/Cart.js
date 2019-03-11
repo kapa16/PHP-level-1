@@ -29,7 +29,7 @@ class Cart {
   }
   
   _convertData(product) {
-    const numberField = ['id_product', 'quantity', 'price'];
+    const numberField = ['id', 'quantity', 'price'];
     const newProduct = [];
     for (const productKey in product) {
       if (numberField.includes(productKey)) {
@@ -55,6 +55,11 @@ class Cart {
     let $totalPrice = $('<div/>', {
       class: 'cart-summary sum-price'
     });
+    let $buttonOrder = $('<button/>', {
+      class: 'btn btn-primary',
+      text: 'Оформить заказ'
+    });
+    $buttonOrder.on('click', () => this._sendToServer({}, 'createOrder'));
     const $cartHeader = $('<div/>', {
       class: 'cart-header'
     }).text(`Корзина (${this.countGoods})`);
@@ -62,21 +67,25 @@ class Cart {
     $cartItemsDiv.appendTo($cartListDiv);
     $totalGoods.appendTo($cartListDiv);
     $totalPrice.appendTo($cartListDiv);
+    $buttonOrder.appendTo($cartListDiv);
     $cartListDiv.appendTo($(this.container));
   }
 
   _addEventHandlers() {
-    $(this.container).on('click', '.reduce-quantity', evt => this._onChangeQuantity(evt, -1));
-    $(this.container).on('click', '.increase-quantity', evt => this._onChangeQuantity(evt, 1));
-    $(this.container).on('click', '.delete-product', evt => this._onChangeQuantity(evt, 0, true));
+    $(this.container).on('click', '.reduce-quantity', evt =>
+      this._onChangeQuantity(evt, -1));
+    $(this.container).on('click', '.increase-quantity', evt =>
+      this._onChangeQuantity(evt, 1));
+    $(this.container).on('click', '.delete-product', evt =>
+      this._onChangeQuantity(evt, 0, true));
   }
 
   _renderItem(product) {
     let $container = $('<div/>', {
       class: 'cart-item',
-      'data-product': product.id_product
+      'data-product': product.id
     });
-    $container.append($(`<p class="product-name">${product.product_name}</p>`));
+    $container.append($(`<p class="product-name">${product.name}</p>`));
 
     const $quantity = $('<div/>', {
       class: 'quantity-wrap'
@@ -99,13 +108,13 @@ class Cart {
   }
 
   _updateCart(product) {
-    let $container = $(`div[data-product="${product.id_product}"]`);
+    let $container = $(`div[data-product="${product.id}"]`);
     $container.find('.product-quantity').text(product.quantity);
     $container.find('.product-price').text(`${product.quantity * product.price} руб.`);
   }
 
   _getCartItem(id) {
-    return this.cartItems.find(product => product.id_product === id);
+    return this.cartItems.find(product => product.id === id);
   }
 
   addProduct(element) {
@@ -115,8 +124,8 @@ class Cart {
       this._changeQuantity(find, 1);
     } else {
       let product = {
-        id_product: productId,
-        product_name: $(element).data('name'),
+        id: productId,
+        name: $(element).data('name'),
         price: +$(element).data('price'),
         quantity: 1
       };
@@ -124,25 +133,37 @@ class Cart {
       this._renderItem(product);
       this.amount += product.price;
       this.countGoods += product.quantity;
-      this._sendToServer(product, 'addToCart');
+      this._sendToServer(this._getPostData(product), 'addToCart');
     }
     this._renderSum();
   }
 
-  _sendToServer(product, methodName) {
+  _getPostData(product) {
+    return {
+      productId: product.id,
+      quantity: product.quantity
+    }
+  }
+
+  _sendToServer(postData, methodName) {
     $.post({
       url: this.source,
       data: {
         apiMethod: methodName,
-        postData: {
-          productId: product.id_product,
-          quantity: product.quantity
-        }
+        postData: postData
       },
       success: (data) => {
+        data = JSON.parse(data);
+        if (data.location) {
+          window.location.replace(data.location);
+        }
         console.log(data);
       },
       error: (error) => {
+        error = JSON.parse(error);
+        if (error.location) {
+          window.location.replace(error.location);
+        }
         console.log(error)
       },
     })
@@ -163,17 +184,17 @@ class Cart {
     this.amount += cartItem.price * quantity;
     if (cartItem.quantity === 0) {
       this._remove(cartItem);
-      this._sendToServer(cartItem, 'deleteFromCart');
+      this._sendToServer(this._getPostData(cartItem), 'deleteFromCart');
     } else {
       this._updateCart(cartItem);
-      this._sendToServer(cartItem, 'changeQuantityProductCart');
+      this._sendToServer(this._getPostData(cartItem), 'changeQuantityProductCart');
     }
     this._renderSum();
   }
 
   _remove(cartItem) {
     this.cartItems.splice(this.cartItems.indexOf(cartItem), 1);
-    let $container = $(`div[data-product="${cartItem['id_product']}"]`);
+    let $container = $(`div[data-product="${cartItem['id']}"]`);
     $container.remove();
   }
 }

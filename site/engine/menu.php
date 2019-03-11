@@ -22,12 +22,19 @@ if (empty($_SESSION['login'])) {
     ];
 } else {
     $menuContent[] = [
-        'title' => 'Привет, ' . $_SESSION['name'],
+        'title' => 'Привет, ' . $_SESSION['login']['name'] ?? '',
         'link'  => '/personal_area.php',
     ];
     $menuContent[] = [
         'title' => 'Выход',
         'link'  => '/logout.php',
+    ];
+}
+
+if (getAdminRole()) {
+    $menuContent[] = [
+        'title' => 'Админка',
+        'link'  => '/admin_page.php',
     ];
 }
 
